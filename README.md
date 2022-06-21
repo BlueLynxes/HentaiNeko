@@ -11,3 +11,6 @@ So there you go, have those.
 ![image](https://user-images.githubusercontent.com/107735757/174418207-3fb104ff-a692-44b9-9a07-8fba6501446f.png)
 
 More info soon hopefully!
+
+** Update 1: **
+ - Development undergoing! First piece of the backend done! (many more missing tho)
