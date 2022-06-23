@@ -10,7 +10,36 @@ So there you go, have those.
 ![image](https://user-images.githubusercontent.com/107735757/174418175-c763f391-869f-4972-b702-786480bd662b.png)
 ![image](https://user-images.githubusercontent.com/107735757/174418207-3fb104ff-a692-44b9-9a07-8fba6501446f.png)
 
+### Build requirements
+_Considering that this is a demo, and literally not ready for anything aside from looking somewhat pretty (only on Ubuntu gnome tho)_
+you can build this using CMake: you will need to have the following dependencies installed:
+ - GTKmm (specifically GTKmm3.0 aka GTK3)
+ - Jsoncpp
+
+I\'ve only ever built this for Linux, thought, you can use Msys to get this running on Windows, should be pretty simple.
+_Note: CMake will output everything on a specific folder, alongside a bunch of folder containing UIs and resources, which you don\'t have._
+_I didn\'t upload the `resources` folders because I\'m hella scared of copyright, so just create one and you\'ll be fine!_
+_You could also drop a random .jpg or .png called `previewFallback.png`, thought, for now it\'s not necessary._
+
 More info soon hopefully!
 
 ** Update 1: **
  - Development undergoing! First piece of the backend done! (many more missing tho)
+
+** Update 2: **
+ - Did a bit more work today, minor edits to the templates (for now refer to `templates/properties-template-updated.jsonc`),
+   the other one will have to be removed, but for now... well, it\'s there.
+ - What\'s in the code? Where is the image preview?
+   So, the screenshots are from a Python prototype which did have the working image previewer (albeit, very slow image previewer)
+   Since the app will be made in C++, I thought it\'d be a waste to just include the python script for demo purposes, so for now,
+   no image preview.
+ - What does the app do? For now, just tests and opening the GUI using the class I made, lot of work to be done still.
+
+ Next steps:
+ - The main priority would be going back to the state of the Python prototype, which means adding the Image Previewer custom widget.
+   Hopefully using the GPU to resize the image to save some performances, but who knows.
+ - Also, adding the about window, it\'s pretty simple and asbolute a must do, very important.
+ - Splitting the UI file into smaller files.
+   This is my fault when I got too happy using glade and ended up making one single giagantic atrocity of a file.
+   There isn\'t anything necessarily **wrong** with this, however, for convenience each file will contain a Window, composite widgets
+   will also have a file of their own.
