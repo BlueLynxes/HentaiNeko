@@ -102,6 +102,7 @@ int main(int argc, char* argv[])
     hn::gui::Application app = hn::gui::Application();
     app.initInsertDataWindow();
     app.showInsertDataWindow();
+    app.initAboutWindow();
     app.run();
     return 0;
 }
