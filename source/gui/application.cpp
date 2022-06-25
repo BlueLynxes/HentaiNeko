@@ -39,8 +39,8 @@ namespace hn
 			int response = dialog.run();
 			if (response == Gtk::ResponseType::RESPONSE_OK)
 			{
-				Gtk::Dialog testdialog = Gtk::Dialog(dialog.get_filename(), Gtk::ResponseType::RESPONSE_OK);
-				testdialog.run();
+				collectionScanner.changeEntryPoint(dialog.get_filename());
+				collectionScanner.scan();
 			}
 		}
 

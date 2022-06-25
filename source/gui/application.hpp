@@ -1,6 +1,8 @@
 #pragma once
 #include <gtkmm.h>
 
+#include "../backend/collection_scanner.hpp"
+
 namespace hn
 {
 	namespace gui
@@ -19,6 +21,7 @@ namespace hn
 			void insertDataWindow_showEntryPointPickerDialogue();
 		private:
 			Glib::RefPtr<Gtk::Application> application;
+			hn::backend::CollectionScanner collectionScanner = hn::backend::CollectionScanner("../resources");
 
 			// For the moment the Main Window, in the future
 			// the main Window will be a greeter/collection display
