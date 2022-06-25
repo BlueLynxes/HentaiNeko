@@ -16,6 +16,7 @@ namespace hn
 			// Insert Data Window
 			void initInsertDataWindow();
 			void showInsertDataWindow();
+			void insertDataWindow_showEntryPointPickerDialogue();
 		private:
 			Glib::RefPtr<Gtk::Application> application;
 
@@ -28,6 +29,8 @@ namespace hn
 			Gtk::Window* insertData_Window;
 			Gtk::HeaderBar* insertData_HeaderBar;
 			Gtk::Button* insertData_Button_ShowAboutWindow;
+			Gtk::Button* insertData_Button_OpenEntryPointPickerDialogue;
+			std::string collectionEntryPointPath = "../resources";
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;

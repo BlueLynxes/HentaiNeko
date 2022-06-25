@@ -1,4 +1,5 @@
 #include "application.hpp"
+#include <iostream>
 
 namespace hn
 {
@@ -27,6 +28,22 @@ namespace hn
 			about_Window->show_all();
 		}
 
+		void Application::insertDataWindow_showEntryPointPickerDialogue()
+		{
+			Gtk::FileChooserDialog dialog = Gtk::FileChooserDialog(
+				"Select Entry point",
+				Gtk::FileChooserAction::FILE_CHOOSER_ACTION_SELECT_FOLDER,
+				Gtk::DialogFlags::DIALOG_MODAL
+				);
+			dialog.add_button("Select", Gtk::ResponseType::RESPONSE_OK);
+			int response = dialog.run();
+			if (response == Gtk::ResponseType::RESPONSE_OK)
+			{
+				Gtk::Dialog testdialog = Gtk::Dialog(dialog.get_filename(), Gtk::ResponseType::RESPONSE_OK);
+				testdialog.run();
+			}
+		}
+
 		void Application::initInsertDataWindow()
 		{
 			insertData_Builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
@@ -36,6 +53,10 @@ namespace hn
 
 			insertData_Builder->get_widget<Gtk::Button>("info_button", insertData_Button_ShowAboutWindow);
 			insertData_Button_ShowAboutWindow->signal_clicked().connect(sigc::mem_fun(*this, &Application::showAboutWindow));
+
+			insertData_Builder->get_widget<Gtk::Button>("select_entry_point_button", insertData_Button_OpenEntryPointPickerDialogue);
+			insertData_Button_OpenEntryPointPickerDialogue->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_showEntryPointPickerDialogue));
+
 		}
 
 		void Application::showInsertDataWindow()
