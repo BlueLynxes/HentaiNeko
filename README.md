@@ -43,3 +43,19 @@ More info soon hopefully!
    This is my fault when I got too happy using glade and ended up making one single giagantic atrocity of a file.
    There isn\'t anything necessarily **wrong** with this, however, for convenience each file will contain a Window, composite widgets
    will also have a file of their own.
+
+** Update 3: **
+ - Added about Window and signal to the button to open said window
+ - Added dialogue to pick collection entry point when clicking the button
+   Yes, the dialogue effectively works, but the collection scanner and image previewer have yet to be implemented.
+
+ Next steps:
+ - Implementing the logic to scan the entry point (essentially, iterate all the subdirs and look for pics)
+ - Implement the image previewer...
+   This sounds simple but isn\'t THAT simple. The original idea would be using a Gtk::Image, unfortunately tho in GTK3
+   said images cannot be stretched, they just stay whatever resolution the image is. In GTK4 you have way more control
+   but for now we\'re stuck on GTK3 (tho, I really wanna move to GTK4 once the tools around id get more mature).
+   So essentially what I have to do is create a pixbuf, load the image in there, and then play with it resizing it using
+   my own custom logic whenever the space size changes... It isn\'t necessarily complicated (at least wasn't on Python)
+   the worry is the performance hit on window resize, which even though not that much of a big deal, still annoying.
+   Thanks GTK3 `;v;`
