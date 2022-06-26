@@ -2,6 +2,7 @@
 #include <gtkmm.h>
 
 #include "../backend/collection_scanner.hpp"
+#include "image_previewer.hpp"
 
 namespace hn
 {
@@ -34,6 +35,7 @@ namespace hn
 			Gtk::Button* insertData_Button_ShowAboutWindow;
 			Gtk::Button* insertData_Button_OpenEntryPointPickerDialogue;
 			std::string collectionEntryPointPath = "../resources";
+			//hn::gui::ImagePreviewer picturePreviewer;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;

@@ -15,6 +15,7 @@ Free today, free forever</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window-position">center</property>
+    <property name="skip-taskbar-hint">True</property>
     <property name="gravity">center</property>
     <signal name="delete-event" handler="about_window_delete_event_cb" swapped="no"/>
     <signal name="destroy-event" handler="about_window_destroy_event_cb" swapped="no"/>

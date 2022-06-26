@@ -22,6 +22,7 @@ namespace hn
 		{
 			about_Builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
 			about_Builder->get_widget<Gtk::Window>("about_window", about_Window);
+			about_Window->set_keep_above(true);
 		}
 
 		void Application::showAboutWindow()
@@ -66,6 +67,12 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Button>("select_entry_point_button", insertData_Button_OpenEntryPointPickerDialogue);
 			insertData_Button_OpenEntryPointPickerDialogue->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_showEntryPointPickerDialogue));
 
+			hn::gui::ImagePreviewer* picturePreviewer = new hn::gui::ImagePreviewer("../resources/previewFallback.png", Glib::RefPtr<Gtk::Window>(insertData_Window));
+			Gtk::Box* previewBox;
+			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
+			Gtk::Label* label = new Gtk::Label("test label");
+			previewBox->pack_start(*picturePreviewer, true, true, 0);
+			//previewBox->pack_start(*label, true, true, 0);
 		}
 
 		void Application::showInsertDataWindow()

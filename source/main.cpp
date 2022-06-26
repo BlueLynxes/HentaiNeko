@@ -3,6 +3,7 @@
 #include "gui/application.hpp"
 
 #include <iostream>
+#include "backend/collection_scanner.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -85,20 +86,11 @@ int main(int argc, char* argv[])
 )");
 
     //std::cout << object.ExportJson(); // Works! :3
-    // TESTING STUFF END
 
-//    auto app =
-//        Gtk::Application::create(argc, argv,
-//            "foss.BlueLynxes.HentaiNeko");
-//    auto builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
-//    Gtk::Window* window;
-//    Gtk::HeaderBar* header;
-//    builder->get_widget<Gtk::Window>("main_window", window);
-//    builder->get_widget<Gtk::HeaderBar>("header", header);
-//    window->set_titlebar(*header);
-//    window->show_all();
-//
-//    return app->run(*window);
+    hn::backend::CollectionScanner scanner = hn::backend::CollectionScanner("../resources");
+    scanner.scan();
+
+    // TESTING STUFF END
     hn::gui::Application app = hn::gui::Application();
     app.initInsertDataWindow();
     app.showInsertDataWindow();
