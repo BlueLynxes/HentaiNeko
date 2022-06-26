@@ -23,10 +23,10 @@ _You could also drop a random .jpg or .png called `previewFallback.png`, thought
 
 More info soon hopefully!
 
-** Update 1: **
+ **Update 1:**
  - Development undergoing! First piece of the backend done! (many more missing tho)
 
-** Update 2: **
+ **Update 2:**
  - Did a bit more work today, minor edits to the templates (for now refer to `templates/properties-template-updated.jsonc`),
    the other one will have to be removed, but for now... well, it\'s there.
  - What\'s in the code? Where is the image preview?
@@ -44,7 +44,7 @@ More info soon hopefully!
    There isn\'t anything necessarily **wrong** with this, however, for convenience each file will contain a Window, composite widgets
    will also have a file of their own.
 
-** Update 3: **
+ **Update 3:**
  - Added about Window and signal to the button to open said window
  - Added dialogue to pick collection entry point when clicking the button
    Yes, the dialogue effectively works, but the collection scanner and image previewer have yet to be implemented.
@@ -60,7 +60,7 @@ More info soon hopefully!
    the worry is the performance hit on window resize, which even though not that much of a big deal, still annoying.
    Thanks GTK3 `;v;`
 
-** Update 4: **
+ **Update 4:**
  - Added collection scanner, kicks in when an entry point is selected via the GUI.
    There is one flaw however, the collection scanner essentially iterates recursively looking for every file, then
    it extracts the file extension, converts is to uppercase and matches it against a list of supported extensions.
@@ -73,7 +73,7 @@ More info soon hopefully!
  Next steps:
  - IMPLEMENT THAT DAMN IMAGE PREVIEWER!
 
-** Update 5: **
+ **Update 5:**
  - Woohoo added the working image preview! And let me tell you, way faste than the Python prototype.
    You can pretty easily test it, just follow the note under the *build requirements* to add a 
    fallback image to preview.
@@ -100,7 +100,7 @@ More info soon hopefully!
  - Implementing a loading bar or spinner while the scanner is running through the collection:
    I would have liked to do this today, but it meant working up a lot of stuff for multithreading and adding stuff
    here and there, so for the moment I decided to not do that, thought, it is necessary to do it in the future.
-   **Important note: ** this means that if you select a pretty large collection with many individual files the program
+   **Important note:** this means that if you select a pretty large collection with many individual files the program
    may hang while it\'s listing everything and parsing the extension, as a result a horrible message will popup saying
    that the application is not responding, which will disappear as soon as the scanner has done it\'s job.
    This happens because the scanner is blocking the thread, and I belive GTK has to report every now and then that
