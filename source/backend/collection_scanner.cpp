@@ -27,7 +27,6 @@ void hn::backend::CollectionScanner::scan()
 		std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper);
 		if (std::find(supportedTypes.begin(), supportedTypes.end(), extension) != supportedTypes.end())
 		{
-			std::cout << file.path() << std::endl;
 			imagesPaths.push_back(file.path());
 		}
 	}
