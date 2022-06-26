@@ -1,4 +1,5 @@
 #include "application.hpp"
+#include <thread>
 #include <iostream>
 
 namespace hn
@@ -41,6 +42,14 @@ namespace hn
 			{
 				collectionScanner.changeEntryPoint(dialog.get_filename());
 				collectionScanner.scan();
+				// This thing will require some multithreading magic, unfortunately
+				// something as simple as thread(func);
+				// showSpinner(); thread.join(); will not work. GTK (from my understanding)
+				// will collect all events such as show this and hide that, and execute them
+				// at a specific point in it's main loop, which will occur after the end of
+				// this function. Meaning that calling thread.join() will block the main
+				// thread and loop until the secondary thread finishes the execution.
+				// Essentially, it's as if there is no multithreading at all.
 			}
 		}
 
