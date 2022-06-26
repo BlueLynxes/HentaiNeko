@@ -59,3 +59,16 @@ More info soon hopefully!
    my own custom logic whenever the space size changes... It isn\'t necessarily complicated (at least wasn't on Python)
    the worry is the performance hit on window resize, which even though not that much of a big deal, still annoying.
    Thanks GTK3 `;v;`
+
+** Update 4: **
+ - Added collection scanner, kicks in when an entry point is selected via the GUI.
+   There is one flaw however, the collection scanner essentially iterates recursively looking for every file, then
+   it extracts the file extension, converts is to uppercase and matches it against a list of supported extensions.
+   This works, but scanning a collection with thousands of files can take time, if that happens... the software
+   literally hangs while it\'s doing it and the OS may even report it as not responding while it\'s doing it\'s thing.
+   Depending on where the pictures are store (aka storage speed) and even computational speed, aside from, of course
+   amount of pictures, this can take a while (a few seconds for 1900 pictures stored on a NAS in LAN, done by a VM).
+   I would really need to do this in another thread and to show a spinner loading thing while it\'s working.
+
+ Next steps:
+ - IMPLEMENT THAT DAMN IMAGE PREVIEWER!
