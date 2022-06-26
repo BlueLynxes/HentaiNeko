@@ -72,3 +72,36 @@ More info soon hopefully!
 
  Next steps:
  - IMPLEMENT THAT DAMN IMAGE PREVIEWER!
+
+** Update 5: **
+ - Woohoo added the working image preview! And let me tell you, way faste than the Python prototype.
+   You can pretty easily test it, just follow the note under the *build requirements* to add a 
+   fallback image to preview.
+   **Note: ** when I say that there is a *working image previewer* I mean that the widget is there, it works
+   and the image does scale correctly, however, the buttons that will change the previewed images have
+   not yet been implemented like in the prototype... so hang on tight, that\'s still to be done.
+
+ Next steps:
+ - Destructor to deallocate memory:
+   Yup, until now I **did not** do that, mind you, because most stuff i scoped to the lifetime of the class
+   anyway, however, from now on some stuff will be working with pointer and stuff allocated to the heap.
+   Now, the `ImagePreviewer` widget has been temporarily and brutally bashed right into the init function for
+   the data insertion window, which is, well, temporary and just to test the widget.
+   There should be a pointer as a class member, which gets initialized by said function and deallocated by the
+   class destroyer. This also means that the pointer should either always be allocated (as in, all init function
+   **must** be called), or there should be some checking of wether a pointer is `nullptr` or not.
+   Eh, I\'ll think about it next time.
+
+ - Implement the next and back buttons for the image previewer:
+   Essentially, this should be the last step for clickign on the *"Select Entry Point"* button and then actually
+   seeing the images in your collection on the image previewer, for now, tested supported formats are `jpg` and `png`
+   with `gif` being kinda supported (only the first frame will show), no videos... still work to be done.
+
+ - Implementing a loading bar or spinner while the scanner is running through the collection:
+   I would have liked to do this today, but it meant working up a lot of stuff for multithreading and adding stuff
+   here and there, so for the moment I decided to not do that, thought, it is necessary to do it in the future.
+   **Important note: ** this means that if you select a pretty large collection with many individual files the program
+   may hang while it\'s listing everything and parsing the extension, as a result a horrible message will popup saying
+   that the application is not responding, which will disappear as soon as the scanner has done it\'s job.
+   This happens because the scanner is blocking the thread, and I belive GTK has to report every now and then that
+   it\'s not stuck, which cannot happen while the thread is stuck by the scanner.
