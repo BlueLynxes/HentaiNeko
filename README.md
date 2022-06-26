@@ -74,10 +74,10 @@ More info soon hopefully!
  - IMPLEMENT THAT DAMN IMAGE PREVIEWER!
 
  **Update 5:**
- - Woohoo added the working image preview! And let me tell you, way faste than the Python prototype.
+ - Woohoo added the working image preview! And let me tell you, way faster than the Python prototype.
    You can pretty easily test it, just follow the note under the *build requirements* to add a 
    fallback image to preview.
-   **Note: ** when I say that there is a *working image previewer* I mean that the widget is there, it works
+   **Note:** when I say that there is a *working image previewer* I mean that the widget is there, it works
    and the image does scale correctly, however, the buttons that will change the previewed images have
    not yet been implemented like in the prototype... so hang on tight, that\'s still to be done.
 
