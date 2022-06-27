@@ -124,6 +124,10 @@ More info soon hopefully!
    compose the json and save it in the picture.
    The good news is that the json parser and serializer already exist, I don't even know yet however what library to user
    to edit metadata.
+
+   *As an extra note to this:* aside from implementing the next and previous buttons, the logic itself to change the current
+   preview image should be moved to a single function, instead of being called here and there kinda randomly.
+   It being called randomly is of course the result of me testing around stuff along the way... so there is that to do too.
    
  - SQLite:
    Let\'s not get ahead of ourselves here, consider this more of a spoiler... but soon enough I\'ll start working on the SQL schema
