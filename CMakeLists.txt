@@ -68,6 +68,16 @@ file(GLOB_RECURSE hnSource
     "source/*.c"
     "source/*.cc"
     "source/*.cpp"
+    "source/backend/*.h"
+    "source/backend/*.hpp"
+    "source/backend/*.c"
+    "source/backend/*.cc"
+    "source/backend/*.cpp"
+    "source/gui/*.h"
+    "source/gui/*.hpp"
+    "source/gui/*.c"
+    "source/gui/*.cc"
+    "source/gui/*.cpp"
 )
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/source" PREFIX "Source" FILES ${hnSource})
 
