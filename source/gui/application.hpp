@@ -36,7 +36,7 @@ namespace hn
 			Gtk::Button* insertData_Button_ShowAboutWindow;
 			Gtk::Button* insertData_Button_OpenEntryPointPickerDialogue;
 			std::string collectionEntryPointPath = "../resources";
-			Glib::Dispatcher initData_scanCompletedDispatcher;
+			Glib::Dispatcher insertData_scanCompletedDispatcher;
 			hn::gui::ImagePreviewer* insertData_imagePreviewer;
 			//hn::gui::ImagePreviewer picturePreviewer;
 

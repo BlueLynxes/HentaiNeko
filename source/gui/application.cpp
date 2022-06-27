@@ -50,7 +50,7 @@ namespace hn
 				spinner->show();
 				previewBox->pack_start(*spinner, true, true, 0);
 				collectionScanner.changeEntryPoint(dialog.get_filename());
-				std::thread scanThread(&hn::backend::CollectionScanner::threadedScan, &collectionScanner, std::ref(initData_scanCompletedDispatcher));
+				std::thread scanThread(&hn::backend::CollectionScanner::threadedScan, &collectionScanner, std::ref(insertData_scanCompletedDispatcher));
 				scanThread.detach();
 			}
 		}
@@ -87,7 +87,7 @@ namespace hn
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 
 			// Dispatcher callback event for the file picker spinner
-			initData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
+			insertData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
 		}
 
 		void Application::showInsertDataWindow()
