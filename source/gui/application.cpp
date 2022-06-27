@@ -50,9 +50,6 @@ namespace hn
 				spinner->show();
 				previewBox->pack_start(*spinner, true, true, 0);
 				collectionScanner.changeEntryPoint(dialog.get_filename());
-				//collectionScanner.scan();
-				// Honestly, this could be done in the window init
-				initData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
 				std::thread scanThread(&hn::backend::CollectionScanner::threadedScan, &collectionScanner, std::ref(initData_scanCompletedDispatcher));
 				scanThread.detach();
 			}
@@ -88,7 +85,9 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
 			Gtk::Label* label = new Gtk::Label("test label");
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
-			//previewBox->pack_start(*label, true, true, 0);
+
+			// Dispatcher callback event for the file picker spinner
+			initData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
 		}
 
 		void Application::showInsertDataWindow()
