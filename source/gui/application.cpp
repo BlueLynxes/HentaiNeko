@@ -41,17 +41,33 @@ namespace hn
 			int response = dialog.run();
 			if (response == Gtk::ResponseType::RESPONSE_OK)
 			{
+				// There is always an imagePreviewer in the previewBox, remove it.
+				Gtk::Box* previewBox;
+				insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
+				delete previewBox->get_children().front();
+				Gtk::Spinner* spinner = new Gtk::Spinner();
+				spinner->start();
+				spinner->show();
+				previewBox->pack_start(*spinner, true, true, 0);
 				collectionScanner.changeEntryPoint(dialog.get_filename());
-				collectionScanner.scan();
-				// This thing will require some multithreading magic, unfortunately
-				// something as simple as thread(func);
-				// showSpinner(); thread.join(); will not work. GTK (from my understanding)
-				// will collect all events such as show this and hide that, and execute them
-				// at a specific point in it's main loop, which will occur after the end of
-				// this function. Meaning that calling thread.join() will block the main
-				// thread and loop until the secondary thread finishes the execution.
-				// Essentially, it's as if there is no multithreading at all.
+				//collectionScanner.scan();
+				// Honestly, this could be done in the window init
+				initData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
+				std::thread scanThread(&hn::backend::CollectionScanner::threadedScan, &collectionScanner, std::ref(initData_scanCompletedDispatcher));
+				scanThread.detach();
 			}
+		}
+
+		void Application::insertDataWindow_onScanCompleted()
+		{
+			// Delete the spinner
+			Gtk::Box* previewBox;
+			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
+			delete previewBox->get_children().front();
+			std::cout << "VECTOR SIZE: " << collectionScanner.imagesPaths.size() << std::endl;
+			insertData_imagePreviewer = new hn::gui::ImagePreviewer(collectionScanner.imagesPaths.front(), Glib::RefPtr<Gtk::Window>(insertData_Window));
+			insertData_imagePreviewer->show();
+			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 		}
 
 		void Application::initInsertDataWindow()
@@ -67,11 +83,11 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Button>("select_entry_point_button", insertData_Button_OpenEntryPointPickerDialogue);
 			insertData_Button_OpenEntryPointPickerDialogue->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_showEntryPointPickerDialogue));
 
-			hn::gui::ImagePreviewer* picturePreviewer = new hn::gui::ImagePreviewer("../resources/previewFallback.png", Glib::RefPtr<Gtk::Window>(insertData_Window));
+			insertData_imagePreviewer = new hn::gui::ImagePreviewer("../resources/previewFallback.png", Glib::RefPtr<Gtk::Window>(insertData_Window));
 			Gtk::Box* previewBox;
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
 			Gtk::Label* label = new Gtk::Label("test label");
-			previewBox->pack_start(*picturePreviewer, true, true, 0);
+			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 			//previewBox->pack_start(*label, true, true, 0);
 		}
 

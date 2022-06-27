@@ -31,3 +31,9 @@ void hn::backend::CollectionScanner::scan()
 		}
 	}
 }
+
+void hn::backend::CollectionScanner::threadedScan(Glib::Dispatcher& dispatcher)
+{
+	scan();
+	dispatcher.emit();
+}
