@@ -21,6 +21,9 @@ namespace hn
 			void showInsertDataWindow();
 			void insertDataWindow_showEntryPointPickerDialogue();
 			void insertDataWindow_onScanCompleted();
+			void insertDataWindow_updateImagePreviewerLabels();
+			void insertDataWindow_buttonPreviewNext();
+			void insertDataWindow_buttonPreviewPrevious();
 		private:
 			Glib::RefPtr<Gtk::Application> application;
 			hn::backend::CollectionScanner collectionScanner = hn::backend::CollectionScanner("../resources");
@@ -38,6 +41,12 @@ namespace hn
 			std::string collectionEntryPointPath = "../resources";
 			Glib::Dispatcher insertData_scanCompletedDispatcher;
 			hn::gui::ImagePreviewer* insertData_imagePreviewer;
+			std::vector<std::string>::iterator insertData_picturesIndex;
+			Gtk::Button* insertData_Button_previewNextPicture;
+			Gtk::Button* insertData_Button_previewPreviousPicture;
+			Gtk::Label* insertData_Label_currentImageNumber;
+			Gtk::Label* insertData_Label_currentImagePath;
+			Gtk::Box* insertData_Box_previewBox;
 			//hn::gui::ImagePreviewer picturePreviewer;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;

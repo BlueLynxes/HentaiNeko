@@ -57,6 +57,7 @@ namespace hn
 
 		void Application::insertDataWindow_onScanCompleted()
 		{
+			insertData_picturesIndex = collectionScanner.imagesPaths.begin();
 			// Delete the spinner
 			Gtk::Box* previewBox;
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
@@ -65,6 +66,47 @@ namespace hn
 			insertData_imagePreviewer = new hn::gui::ImagePreviewer(collectionScanner.imagesPaths.front(), Glib::RefPtr<Gtk::Window>(insertData_Window));
 			insertData_imagePreviewer->show();
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
+			insertDataWindow_updateImagePreviewerLabels();
+		}
+
+		// The buttons changing the image preview have to destroy the old previewer, init a new one
+		// and then update the labels
+		void Application::insertDataWindow_buttonPreviewNext()
+		{
+			if (insertData_picturesIndex + 1 < collectionScanner.imagesPaths.end())
+			{
+				insertData_picturesIndex++;
+				insertData_Box_previewBox->remove(*insertData_Box_previewBox->get_children().front());
+				//delete insertData_imagePreviewer;
+				insertData_imagePreviewer = new hn::gui::ImagePreviewer(*insertData_picturesIndex, Glib::RefPtr<Gtk::Window>(insertData_Window));
+				insertData_imagePreviewer->show();
+				insertData_Box_previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
+				insertDataWindow_updateImagePreviewerLabels();
+			}
+		}
+
+		void Application::insertDataWindow_buttonPreviewPrevious()
+		{
+			if (insertData_picturesIndex - 1 > collectionScanner.imagesPaths.begin())
+			{
+				insertData_picturesIndex--;
+				insertData_Box_previewBox->remove(*insertData_Box_previewBox->get_children().front());
+				//delete insertData_imagePreviewer;
+				insertData_imagePreviewer = new hn::gui::ImagePreviewer(*insertData_picturesIndex, Glib::RefPtr<Gtk::Window>(insertData_Window));
+				insertData_imagePreviewer->show();
+				insertData_Box_previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
+				insertDataWindow_updateImagePreviewerLabels();
+			}
+		}
+
+		void Application::insertDataWindow_updateImagePreviewerLabels()
+		{
+			insertData_Label_currentImagePath->set_text(*insertData_picturesIndex);
+			std::string currentImageNumber = 
+				std::to_string(insertData_picturesIndex - collectionScanner.imagesPaths.begin() + 1)
+				+ " / "
+				+ std::to_string(collectionScanner.imagesPaths.end() - collectionScanner.imagesPaths.begin());
+			insertData_Label_currentImageNumber->set_text(currentImageNumber);
 		}
 
 		void Application::initInsertDataWindow()
@@ -83,11 +125,20 @@ namespace hn
 			insertData_imagePreviewer = new hn::gui::ImagePreviewer("../resources/previewFallback.png", Glib::RefPtr<Gtk::Window>(insertData_Window));
 			Gtk::Box* previewBox;
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
-			Gtk::Label* label = new Gtk::Label("test label");
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 
 			// Dispatcher callback event for the file picker spinner
 			insertData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
+
+			insertData_Builder->get_widget("buttonNextImage", insertData_Button_previewNextPicture);
+			insertData_Builder->get_widget("buttonPreviousImage", insertData_Button_previewPreviousPicture);
+			insertData_Button_previewNextPicture->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_buttonPreviewNext));
+			insertData_Button_previewPreviousPicture->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_buttonPreviewPrevious));
+
+			insertData_Builder->get_widget("image-previewer-path", insertData_Label_currentImagePath);
+			insertData_Builder->get_widget("label_current_picture", insertData_Label_currentImageNumber);
+
+			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", insertData_Box_previewBox);
 		}
 
 		void Application::showInsertDataWindow()
