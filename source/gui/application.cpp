@@ -44,7 +44,7 @@ namespace hn
 				// There is always an imagePreviewer in the previewBox, remove it.
 				Gtk::Box* previewBox;
 				insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
-				delete previewBox->get_children().front();
+				previewBox->remove(*previewBox->get_children().front());
 				Gtk::Spinner* spinner = new Gtk::Spinner();
 				spinner->start();
 				spinner->show();
@@ -60,7 +60,7 @@ namespace hn
 			// Delete the spinner
 			Gtk::Box* previewBox;
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
-			delete previewBox->get_children().front();
+			previewBox->remove(*previewBox->get_children().front());
 			std::cout << "VECTOR SIZE: " << collectionScanner.imagesPaths.size() << std::endl;
 			insertData_imagePreviewer = new hn::gui::ImagePreviewer(collectionScanner.imagesPaths.front(), Glib::RefPtr<Gtk::Window>(insertData_Window));
 			insertData_imagePreviewer->show();
