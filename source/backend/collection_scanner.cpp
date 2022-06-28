@@ -15,6 +15,7 @@ void hn::backend::CollectionScanner::changeEntryPoint(const std::string& entryPo
 
 void hn::backend::CollectionScanner::scan()
 {
+	imagesPaths.clear();
 	std::array<std::string, 3> supportedTypes 
 	{
 		".JPG", ".JPEG",
