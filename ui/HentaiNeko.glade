@@ -2228,16 +2228,26 @@ Free today, free forever</property>
     <property name="window-position">center</property>
     <signal name="delete-event" handler="json_preview_window_delete_event_cb" swapped="no"/>
     <child>
-      <object class="GtkTextView">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="margin-start">10</property>
-        <property name="margin-end">10</property>
-        <property name="margin-top">10</property>
-        <property name="margin-bottom">10</property>
-        <property name="editable">False</property>
-        <property name="cursor-visible">False</property>
-        <property name="accepts-tab">False</property>
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkTextView" id="json_preview_text_view">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="editable">False</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>

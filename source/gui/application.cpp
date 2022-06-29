@@ -140,11 +140,33 @@ namespace hn
 			insertData_Builder->get_widget("label_current_picture", insertData_Label_currentImageNumber);
 
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", insertData_Box_previewBox);
+
+			insertData_Builder->get_widget<Gtk::Button>("check_json_preview_button", insertData_Button_openJsonPreview);
+			insertData_Button_openJsonPreview->signal_clicked().connect(sigc::mem_fun(*this, &Application::showPreviewJsonWindow));
 		}
 
 		void Application::showInsertDataWindow()
 		{
 			insertData_Window->show_all();
+		}
+
+		// Use the `previewJsonWindow_setText` method to set the text inside
+		void Application::initPreviewJsonWindow()
+		{
+			previewJson_Builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
+
+			previewJson_Builder->get_widget("json_preview_window", previewJson_Window);
+			previewJson_Window->set_default_size(800, 800);
+			previewJson_Builder->get_widget("json_preview_text_view", previewJson_TextView_previewTextView);
+			// As it turns out, I could probably use a TextBuffer from Glade and save doing it here
+			previewJson_TextBuffer = Gtk::TextBuffer::create();
+			previewJson_TextView_previewTextView->set_buffer(previewJson_TextBuffer);
+		}
+
+		void Application::showPreviewJsonWindow()
+		{
+			previewJson_TextBuffer->set_text(imageProperties.ExportJson());
+			previewJson_Window->show_all();
 		}
 	}
 }

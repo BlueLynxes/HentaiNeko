@@ -2,6 +2,7 @@
 #include <gtkmm.h>
 
 #include "../backend/collection_scanner.hpp"
+#include "../backend/image_properties.hpp"
 #include "image_previewer.hpp"
 
 namespace hn
@@ -24,9 +25,13 @@ namespace hn
 			void insertDataWindow_updateImagePreviewerLabels();
 			void insertDataWindow_buttonPreviewNext();
 			void insertDataWindow_buttonPreviewPrevious();
+			// Preview Json Window
+			void initPreviewJsonWindow();
+			void showPreviewJsonWindow();
 		private:
 			Glib::RefPtr<Gtk::Application> application;
 			hn::backend::CollectionScanner collectionScanner = hn::backend::CollectionScanner("../resources");
+			hn::backend::ImageProperties imageProperties = hn::backend::ImageProperties();
 
 			// For the moment the Main Window, in the future
 			// the main Window will be a greeter/collection display
@@ -47,10 +52,15 @@ namespace hn
 			Gtk::Label* insertData_Label_currentImageNumber;
 			Gtk::Label* insertData_Label_currentImagePath;
 			Gtk::Box* insertData_Box_previewBox;
-			//hn::gui::ImagePreviewer picturePreviewer;
+			Gtk::Button* insertData_Button_openJsonPreview;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;
+
+			Glib::RefPtr<Gtk::Builder> previewJson_Builder;
+			Gtk::Window* previewJson_Window;
+			Gtk::TextView* previewJson_TextView_previewTextView;
+			Glib::RefPtr<Gtk::TextBuffer> previewJson_TextBuffer;
 
 		};
 	}

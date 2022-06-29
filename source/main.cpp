@@ -95,6 +95,7 @@ int main(int argc, char* argv[])
     app.initInsertDataWindow();
     app.showInsertDataWindow();
     app.initAboutWindow();
+    app.initPreviewJsonWindow();
     app.run();
     return 0;
 }
