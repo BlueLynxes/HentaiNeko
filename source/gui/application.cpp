@@ -41,6 +41,7 @@ namespace hn
 			int response = dialog.run();
 			if (response == Gtk::ResponseType::RESPONSE_OK)
 			{
+				insertData_Button_OpenEntryPointPickerDialogue->set_sensitive(false);
 				// There is always an imagePreviewer in the previewBox, remove it.
 				Gtk::Box* previewBox;
 				insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
@@ -66,6 +67,7 @@ namespace hn
 			insertData_imagePreviewer->show();
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 			insertDataWindow_updateImagePreviewerLabels();
+			insertData_Button_OpenEntryPointPickerDialogue->set_sensitive(true);
 		}
 
 		// The buttons changing the image preview have to destroy the old previewer, init a new one
