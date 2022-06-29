@@ -87,7 +87,7 @@ namespace hn
 
 		void Application::insertDataWindow_buttonPreviewPrevious()
 		{
-			if (insertData_picturesIndex - 1 > collectionScanner.imagesPaths.begin())
+			if (insertData_picturesIndex - 1 >= collectionScanner.imagesPaths.begin())
 			{
 				insertData_picturesIndex--;
 				insertData_Box_previewBox->remove(*insertData_Box_previewBox->get_children().front());
