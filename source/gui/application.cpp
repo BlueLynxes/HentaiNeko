@@ -62,7 +62,6 @@ namespace hn
 			Gtk::Box* previewBox;
 			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
 			previewBox->remove(*previewBox->get_children().front());
-			std::cout << "VECTOR SIZE: " << collectionScanner.imagesPaths.size() << std::endl;
 			insertData_imagePreviewer = new hn::gui::ImagePreviewer(collectionScanner.imagesPaths.front(), Glib::RefPtr<Gtk::Window>(insertData_Window));
 			insertData_imagePreviewer->show();
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
