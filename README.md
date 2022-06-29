@@ -166,3 +166,22 @@ More info soon hopefully!
  - Implement the composed JSON preview, this will almost be more of a debug tool than an end user thing... but I need it, and anyway I
    don't see anythign wrong with user checking out the JSON or importing a JSON they made with another app or by hand (anyway only valid
    parts of a JSON will be loaded, and we can implement error messages if need be).
+
+ **Update 8:**
+ - The `Select Entrypoint` now becomes disabled when a scan starts and until it ends.
+ - An issue has been found where clicking the next picture button and then going back prevented you from seeing the first 1 picture again; issue has been fixed.
+ - Implemented the JSON Preview:
+   It does effectively work, but so far the `ImageProperties` object doesn't get any input, so there isn't anything to add in the json aside from the base structure.
+   It would also be cool to add some basic syntax highlight, the gnome project has some stuff [here](https://wiki.gnome.org/Projects/GtkSourceView) but since this is hardly
+   a priority of any kind, for the moment I'll skip this. It would also be nice the set the font to a mono something... hey it works, for not that's enough!
+
+ Next Steps:
+ - There is not check regarding permission or accessibility to the files, therefore not having access to a file will make the application crash during the scan.
+   (I hopened an issue for this since keeping track of it on this file is not ideal)
+ - As said in *Update 7*, implement the data input is the next major step.
+   This will be a lot of work, considering how the amount of input to set and data to collect.
+ - Saving JSON to picture file:
+   Once the JSON gets added to the picture file, effectively the data input part is done, the only missing thing would be adding some more formats
+   to the image previewer, for now only `JPG`, `PNG` and supposedly the first frame of `GIF` are supported, `webp` isn't, which is a surprisingly common
+   format.
+ - Start working on auto completion (more on this on a later update, everything is on a document that I haven't pushed on the repo yet).
