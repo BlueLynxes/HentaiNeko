@@ -205,3 +205,31 @@ More info soon hopefully!
    to the image previewer, for now only `JPG`, `PNG` and supposedly the first frame of `GIF` are supported, `webp` isn't, which is a surprisingly common
    format.
  - Start working on auto completion (more on this on a later update, everything is on a document that I haven't pushed on the repo yet).
+
+ **Update 8:**
+ - The application can now recover from a failed scan and an error message is shown.
+ - Components initialization have been moved to the `Application` constructor.
+
+ Next Steps:
+ - Custom input widget:
+   As you can see from the screenshot, many parts of the input GUI use the same combination of widgets, except for two field
+   being slightly different, those widgets are a Box containing a Scrolled Windows containing a List Box containing a number
+   of Rows with checkboxes and label, at the very bottom there is an entry with a button on the side.
+
+   The idea is that list contains all the previosuly user (or template) define tags that can be applied, since tags can be user
+   defined aside from the standard ones (standard which still needs to be made), there is an entry at the bottom to create said tags.
+   
+   The first step is isolating the Widget from the main glade file, since it will be used many times on different occasions, therefore
+   it is now effectively time to split up the UI files, before this one becomes too large and hard to manage, thought, I still ma not
+   completely convinced about it (since it would be more annoying to deal with it in Glade).
+
+   Then implementing the parses and serializer for the user defined tags, since those will also have to appear on the list of available tags.
+
+   Once all of that is done, the custom widget class will need method to both populate the list and to retrieve which checkboxes have been populated.
+
+   All those info will then be passed to the object composing the json to write onto the picture.
+
+   **But wait, there's more**
+   Obviously a picture could already have metadata in it, this would mean two things, first of all the user should have a button to skip the pictures
+   that already have metadata in them (In the scan dialog maybe, adding a checkbox could work?), then, if a loaded picture does already have metatdata,
+   it should populate the GUI.
