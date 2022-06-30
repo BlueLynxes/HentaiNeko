@@ -9,6 +9,9 @@ namespace hn
 		Application::Application()
 		{
 			this->application = Gtk::Application::create("foss.BlueLynxes.HentaiNeko");
+			initInsertDataWindow();
+			initAboutWindow();
+			initPreviewJsonWindow();
 		}
 
 		void Application::run()
