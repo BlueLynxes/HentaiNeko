@@ -233,3 +233,12 @@ More info soon hopefully!
    Obviously a picture could already have metadata in it, this would mean two things, first of all the user should have a button to skip the pictures
    that already have metadata in them (In the scan dialog maybe, adding a checkbox could work?), then, if a loaded picture does already have metatdata,
    it should populate the GUI.
+
+ **Update 8.1:**
+ - Eye properties have been removed since theys hould really just be some facialExpressions
+ - Created a new updated template for the user define / template defined tags... Ideally, there should be a standard one and separate
+   user defined ones, so to allow users to export their preferences separately from the community ones, then allowing HentaiNeko to merge them.
+   This way a user could have both the community provided options + it's own custom tags and values.
+
+   At the of the day, in the final config tags object, there would be no difference, it would just be a case of initializing the object with
+   multiple files, checking whether a specific item already exists, and if so what about the subtags and what not.
