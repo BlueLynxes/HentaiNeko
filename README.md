@@ -242,3 +242,11 @@ More info soon hopefully!
 
    At the of the day, in the final config tags object, there would be no difference, it would just be a case of initializing the object with
    multiple files, checking whether a specific item already exists, and if so what about the subtags and what not.
+ - Created a version label, which gets initialized from CMake, the version is `0.8.1`, the way it works is actually pretty simple, and
+   it follows the `major.minor.patch` scheme.
+   - `major` = `0`, since as of right now the application is in development and has not reached a major release yet (aka v 1.0)
+   - `minor` = `8`, which is the current *"update"* recorded on this log, which is effectively going to become **changelog**.
+   - `patch` = `1`, since after the 8th update I have given some extra stuff and defined it as a patch
+   
+   If for whatever reason the version macro is missing (which technically cannot happen since cmake inits it), a different message
+   will be shown.
