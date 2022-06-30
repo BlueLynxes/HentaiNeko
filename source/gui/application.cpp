@@ -26,6 +26,12 @@ namespace hn
 			about_Builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
 			about_Builder->get_widget<Gtk::Window>("about_window", about_Window);
 			about_Window->set_keep_above(true);
+
+			about_Builder->get_widget<Gtk::Label>("about_version_label", about_Label_version);
+#ifdef APPLICATION_VERSION
+			about_Label_version->set_text(APPLICATION_VERSION);
+			
+#endif
 		}
 
 		void Application::showAboutWindow()

@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.22.1)
-project(HentaiNeko VERSION 0.0.0)
+project(HentaiNeko VERSION 0.8.1)
+
+add_compile_definitions(APPLICATION_VERSION="0.8.1")
 
 # Set C++ to 17
 set(CMAKE_CXX_STANDARD 17)

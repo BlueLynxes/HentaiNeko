@@ -58,6 +58,7 @@ namespace hn
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;
+			Gtk::Label* about_Label_version;
 
 			Glib::RefPtr<Gtk::Builder> previewJson_Builder;
 			Gtk::Window* previewJson_Window;
