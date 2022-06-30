@@ -51,7 +51,7 @@ namespace hn
 				spinner->show();
 				previewBox->pack_start(*spinner, true, true, 0);
 				collectionScanner.changeEntryPoint(dialog.get_filename());
-				std::thread scanThread(&hn::backend::CollectionScanner::threadedScan, &collectionScanner, std::ref(insertData_scanCompletedDispatcher));
+				std::thread scanThread(&hn::backend::CollectionScanner::threadedScan, &collectionScanner, std::ref(insertData_Dispatcher_scanSuccess), std::ref(insertData_Dispatcher_scanError));
 				scanThread.detach();
 			}
 		}
@@ -67,6 +67,26 @@ namespace hn
 			insertData_imagePreviewer->show();
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 			insertDataWindow_updateImagePreviewerLabels();
+			insertData_Button_OpenEntryPointPickerDialogue->set_sensitive(true);
+		}
+
+		void Application::insertDataWindow_onScanError()
+		{
+			insertData_Label_currentImagePath->set_text("Image Path");
+			insertData_Label_currentImageNumber->set_text("- / -");
+			insertData_imagePreviewer = new hn::gui::ImagePreviewer("../resources/previewFallback.png", Glib::RefPtr<Gtk::Window>(insertData_Window));
+			Gtk::Box* previewBox;
+			insertData_Builder->get_widget<Gtk::Box>("PreviewBox", previewBox);
+			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
+			previewBox->show_all();
+			Gtk::MessageDialog dialog = Gtk::MessageDialog(
+				"An error has occurred while scanning your collection...\nMake you sure you have permission to access the files.",
+				false,
+				Gtk::MessageType::MESSAGE_ERROR,
+				Gtk::ButtonsType::BUTTONS_OK,
+				true
+			);
+			dialog.run();
 			insertData_Button_OpenEntryPointPickerDialogue->set_sensitive(true);
 		}
 
@@ -129,7 +149,8 @@ namespace hn
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 
 			// Dispatcher callback event for the file picker spinner
-			insertData_scanCompletedDispatcher.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
+			insertData_Dispatcher_scanSuccess.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanCompleted));
+			insertData_Dispatcher_scanError.connect(sigc::mem_fun(*this, &hn::gui::Application::insertDataWindow_onScanError));
 
 			insertData_Builder->get_widget("buttonNextImage", insertData_Button_previewNextPicture);
 			insertData_Builder->get_widget("buttonPreviousImage", insertData_Button_previewPreviousPicture);

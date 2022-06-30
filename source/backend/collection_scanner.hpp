@@ -17,7 +17,7 @@ namespace hn
 
 			void changeEntryPoint(const std::string& entryPoint);
 			void scan();
-			void threadedScan(Glib::Dispatcher& dispatcher);
+			void threadedScan(Glib::Dispatcher& dispatcherSuccess, Glib::Dispatcher& dispatcherFailure);
 
 			std::filesystem::path entryPointPath;
 			std::vector<std::string> imagesPaths;

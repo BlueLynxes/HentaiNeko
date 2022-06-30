@@ -22,6 +22,7 @@ namespace hn
 			void showInsertDataWindow();
 			void insertDataWindow_showEntryPointPickerDialogue();
 			void insertDataWindow_onScanCompleted();
+			void insertDataWindow_onScanError();
 			void insertDataWindow_updateImagePreviewerLabels();
 			void insertDataWindow_buttonPreviewNext();
 			void insertDataWindow_buttonPreviewPrevious();
@@ -44,7 +45,8 @@ namespace hn
 			Gtk::Button* insertData_Button_ShowAboutWindow;
 			Gtk::Button* insertData_Button_OpenEntryPointPickerDialogue;
 			std::string collectionEntryPointPath = "../resources";
-			Glib::Dispatcher insertData_scanCompletedDispatcher;
+			Glib::Dispatcher insertData_Dispatcher_scanSuccess;
+			Glib::Dispatcher insertData_Dispatcher_scanError;
 			hn::gui::ImagePreviewer* insertData_imagePreviewer;
 			std::vector<std::string>::iterator insertData_picturesIndex;
 			Gtk::Button* insertData_Button_previewNextPicture;

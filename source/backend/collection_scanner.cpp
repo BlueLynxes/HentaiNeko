@@ -33,8 +33,16 @@ void hn::backend::CollectionScanner::scan()
 	}
 }
 
-void hn::backend::CollectionScanner::threadedScan(Glib::Dispatcher& dispatcher)
+void hn::backend::CollectionScanner::threadedScan(Glib::Dispatcher& dispatcherSuccess, Glib::Dispatcher& dispatcherFailure)
 {
-	scan();
-	dispatcher.emit();
+	try
+	{
+		scan();
+	}
+	catch (const std::exception& e)
+	{
+		imagesPaths.clear();
+		dispatcherFailure.emit();
+	}
+	dispatcherSuccess.emit();
 }
