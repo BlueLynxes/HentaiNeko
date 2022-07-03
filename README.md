@@ -250,3 +250,9 @@ More info soon hopefully!
    
    If for whatever reason the version macro is missing (which technically cannot happen since cmake inits it), a different message
    will be shown.
+
+ **Update 0.8.2:**
+ - Started working on the input side of things. I managed to get a custom checkbox appearing with the string selected on the entry,
+   however, a better approach would be making a custom widget in code and having that managing it's own stuff, instead off having to
+   implement what I did in the previous commit over and over again...
+   Essentially... there is progress, but nowhere near usable.
