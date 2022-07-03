@@ -139,6 +139,19 @@ namespace hn
 			insertData_Label_currentImageNumber->set_text(currentImageNumber);
 		}
 
+		void Application::insertDataWindow_General_SceneType_AddLabel()
+		{
+			Gtk::ListBoxRow* newRow = Gtk::manage(new Gtk::ListBoxRow());
+			newRow->add(*new Gtk::CheckButton(insertData_Entry_General_SceneType->get_text()));
+			newRow->set_margin_top(5);
+			newRow->set_margin_bottom(5);
+			newRow->set_margin_start(5);
+			newRow->set_margin_end(5);
+			newRow->show_all();
+			insertData_ListBox_General_SceneType->add(*newRow);
+			insertData_Entry_General_SceneType->set_text("");
+		}
+
 		void Application::initInsertDataWindow()
 		{
 			insertData_Builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
@@ -173,6 +186,11 @@ namespace hn
 
 			insertData_Builder->get_widget<Gtk::Button>("check_json_preview_button", insertData_Button_openJsonPreview);
 			insertData_Button_openJsonPreview->signal_clicked().connect(sigc::mem_fun(*this, &Application::showPreviewJsonWindow));
+
+			insertData_Builder->get_widget<Gtk::Entry>("insert_general_scenetype_newlabel", insertData_Entry_General_SceneType);
+			insertData_Builder->get_widget<Gtk::Button>("insert_general_scenetype_newlabel_button", insertData_Button_General_SceneType);
+			insertData_Button_General_SceneType->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_General_SceneType_AddLabel));
+			insertData_Builder->get_widget<Gtk::ListBox>("insert_general_scenetype_listbox", insertData_ListBox_General_SceneType);
 		}
 
 		void Application::showInsertDataWindow()
