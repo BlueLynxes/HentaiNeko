@@ -191,6 +191,10 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Button>("insert_general_scenetype_newlabel_button", insertData_Button_General_SceneType);
 			insertData_Button_General_SceneType->signal_clicked().connect(sigc::mem_fun(*this, &Application::insertDataWindow_General_SceneType_AddLabel));
 			insertData_Builder->get_widget<Gtk::ListBox>("insert_general_scenetype_listbox", insertData_ListBox_General_SceneType);
+
+			insertData_Builder->get_widget<Gtk::Box>("general-scenetype-page", insertData_Box_General_SceneType);
+			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox("New scene type");
+			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
 		}
 
 		void Application::showInsertDataWindow()

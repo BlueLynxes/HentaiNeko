@@ -2494,7 +2494,7 @@ Free today, free forever</property>
                                 <property name="can-focus">False</property>
                                 <property name="transition-type">slide-left-right</property>
                                 <child>
-                                  <object class="GtkBox">
+                                  <object class="GtkBox" id="general-scenetype-page">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="margin-start">5</property>

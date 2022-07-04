@@ -4,6 +4,7 @@
 #include "../backend/collection_scanner.hpp"
 #include "../backend/image_properties.hpp"
 #include "image_previewer.hpp"
+#include "dynamic_checkbox_list.hpp"
 
 namespace hn
 {
@@ -59,6 +60,8 @@ namespace hn
 			Gtk::Entry* insertData_Entry_General_SceneType;
 			Gtk::Button* insertData_Button_General_SceneType;
 			Gtk::ListBox* insertData_ListBox_General_SceneType;
+			Gtk::Box* insertData_Box_General_SceneType;
+			hn::gui::widget::DynamicCheckbox* insertData_DynamicCheckbox_SceneType;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;
