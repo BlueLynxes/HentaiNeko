@@ -256,3 +256,21 @@ More info soon hopefully!
    however, a better approach would be making a custom widget in code and having that managing it's own stuff, instead off having to
    implement what I did in the previous commit over and over again...
    Essentially... there is progress, but nowhere near usable.
+
+ **Update 0.8.2.1:**
+ - Essentially I started doing what I said I would have done in `v0.8.2`, meaning I made a custom widget that implements the scrollable
+   list with the checkboxes + the entry and the button.
+   It is still work in progress...
+
+ Next Steps:
+ - Keeping on working on that very same custom widget. My idea would be turning the class that exists right now into a template base
+   class, then having other class inheriting the base class. The template would serve as way to customize what kind of input the class would have, for example, in some cases the widget will only show simple checkboxes buttons in the list, in other cases it will need
+   to display custom horizontal boxes with two entries + some buttons.
+   
+   I'm still thinking about the design, I may also decide to ditch the whole template thing and just inherit and overload stuff...
+   thought, I guess in thise case this would be the less optimal decision.
+
+   Anyway, pretty satisfied with the progress since this was a main thing that needed to be done and will be used a lot.
+
+ - After completing the custom widget, the class to read and store custom tags preferences should be implemented, since that will be
+   what will show the initials items in the widget list. And of course, it will also be where the widget saves new tags.
