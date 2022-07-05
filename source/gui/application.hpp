@@ -61,7 +61,7 @@ namespace hn
 			Gtk::Button* insertData_Button_General_SceneType;
 			Gtk::ListBox* insertData_ListBox_General_SceneType;
 			Gtk::Box* insertData_Box_General_SceneType;
-			hn::gui::widget::DynamicCheckbox* insertData_DynamicCheckbox_SceneType;
+			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton, bool>* insertData_DynamicCheckbox_SceneType;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;
