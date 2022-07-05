@@ -274,3 +274,37 @@ More info soon hopefully!
 
  - After completing the custom widget, the class to read and store custom tags preferences should be implemented, since that will be
    what will show the initials items in the widget list. And of course, it will also be where the widget saves new tags.
+
+ **Update 0.8.2.2:**
+ - The `DynamicCheckbox` can now actually store any kind of widget of which type is provided via template... there are a few **BUT**
+   however. First of all, for now a HUGE assumption is made on the constructor of said widget passed via template, and the assumption is that said widget will constructor taking an `std::string` or equivalent. For example, a `Gtk::Label` or a `Gtk::CheckButton`, now
+   considering the usecase which is limited to `Gtk::CheckButton` and custom widgets... This is a requirement that can be respected.
+
+   Now, wether this is the right thing to do or not is a different story... probably not, maybe not, maybe I should try to do some
+   templating magic to get the function and argument to try and always use the correct constructor, whatever.
+   As a requirement to be used by `DynamicCheckbox`, the widget shall have a constructor taking an `std::string` or equivalent.
+
+ Next Steps:
+ - Rename `DynamicCheckbox` to `DynamicList` since now the list is not limited to `Gtk::CheckButton`es.
+ - Complete the integrations, which boils down to:
+   - Storing data alonside the widget.
+     Internally the class has a `std::vector` which only contains the widget, this should be enough to retrieve the data, since
+     the widget is the mean to retrieve the data after all, for example, the state of the checkbox is something that is gained through
+     the `Gtk::ChecButton` anyway.
+
+     How this is done is yet to be considered. Realistically, there could be a template specialization, where the function is deleted
+     if the type of the widget is not recognized (meaning a custom one or a known Gtk one). This way the correct method to retrieve
+     data could be called if known, but the list could still act as a list if not.
+
+   - Retrieving all the collected data:
+     Meaning return a `std::vector<Data>`, which will be created simply by iterating every widget in the vector of widgets and
+     while retrieving the data using the way stated above.
+
+   - Individual listbox element callback functions:
+     
+     This will be the trickier problem. Tags can be of course added, but also removed from the list, therefore a remove button should
+     be available in the list of available items (thought, of course, this would be custom to each widget).
+
+     The best solution probably is leaving this up to the custom widget itself, but then how to avoid sefault when deleting the widget
+     that Gtk will try to draw?
+     Still a few considerations to do.
