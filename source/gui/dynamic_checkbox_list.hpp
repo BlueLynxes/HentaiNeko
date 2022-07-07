@@ -4,8 +4,6 @@
 #include <vector>
 #include <utility>
 
-#include <iostream>
-
 namespace hn
 {
 	namespace gui::widget
