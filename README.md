@@ -308,3 +308,33 @@ More info soon hopefully!
      The best solution probably is leaving this up to the custom widget itself, but then how to avoid sefault when deleting the widget
      that Gtk will try to draw?
      Still a few considerations to do.
+
+  **Update 0.8.2.3:**
+  - Refined the `DynamicCheckbox` custom widget (_which needs to be renamed btw_).
+    I realized that there is no point into doing the whole pair thing (thought I got it to work and as suspected the problem was just
+    `Gtk::Checkbutton` being non copyable... for obvious reasons! So literally `std::move` fixed it right away), the reason being
+    that anyway all the data is stored withing the Widget itself so what would be the point of copying all of that into another vector?
+
+    Also, there are a couple of considerations to do:
+    - First of all, it is pretty annoying to extract data from the widget itselfs when inside the `DynamicCheckbox`, the reason being
+      that every Widget can have a different method to extract the required data, for example: `get_active()` for `Checkbutton` and
+      `get_text()` for `Entry`... We would need to do a lot of magic and add a log of _intricacies_ (written fancy like that), in order
+      to call the correct function and extract the data. Probably possible with templates somehow tho.
+    - It is unnecessary, and frankly, a waste.
+      Whatever thing is creating the `DynamicCheckbox` knows exactly how to retrieve the data using what method. So how about we just
+      return a lovely reference to the internal vector containing all the widgets, and then let the caller deal with it?
+
+      Well, that's exactly what's going on now. Meaning we can effectively add whatever type of widget we want, as long as it can be
+      added as a `Gtk::Widget`, it's good to go.
+  - The Json preview window now shows the selected scene types from the list! Yay!
+    *(this was actually done to test the thing above, but pretend I did it to add the thing right away)*
+
+ Next Steps:
+  - Rename `DynamicChekbox` to `DynamicList` or something like that.
+  - Create the parser for the default tags thing and use it to add the default checkboxes where needed.
+  - Add a system to delete the widget inside the listbox, using a button within the lsitbox itself.
+    
+    And I kind of have an idea to accomplish this.
+    Essentially, instead of having the user create the button, how about the Widget the user adds is not directly added within the
+    list, but rather it is added inside an horizontal box which will contain both the custom widget and a button on the right to
+    delete the widget (which is also going to delete the label from the custom defined tags file).
