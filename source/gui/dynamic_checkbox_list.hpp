@@ -2,12 +2,15 @@
 
 #include <gtkmm.h>
 #include <vector>
+#include <utility>
+
+#include <iostream>
 
 namespace hn
 {
 	namespace gui::widget
 	{
-		template <typename WidgetType, typename Data>
+		template <typename WidgetType>
 		class DynamicCheckbox
 		{
 		public:
@@ -19,7 +22,7 @@ namespace hn
 				entryBox{ Gtk::Box() },
 				entry{ Gtk::Entry() },
 				addEntryButton{ Gtk::Button() },
-				separator{ Gtk::Separator()}
+				separator{ Gtk::Separator() }
 			{
 				listbox.set_selection_mode(Gtk::SelectionMode::SELECTION_NONE);
 				viewport.add(listbox);
@@ -62,6 +65,11 @@ namespace hn
 			void addWidget(WidgetType& widget)
 			{
 				listbox.add(widget);
+			}
+
+			const std::vector<WidgetType>& getWidgets()
+			{
+				return listboxItems;
 			}
 
 			Gtk::Widget& operator()()

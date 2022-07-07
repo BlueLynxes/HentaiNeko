@@ -193,7 +193,7 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::ListBox>("insert_general_scenetype_listbox", insertData_ListBox_General_SceneType);
 
 			insertData_Builder->get_widget<Gtk::Box>("general-scenetype-page", insertData_Box_General_SceneType);
-			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton, bool>("New scene type");
+			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>("New scene type");
 			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
 		}
 
@@ -215,8 +215,24 @@ namespace hn
 			previewJson_TextView_previewTextView->set_buffer(previewJson_TextBuffer);
 		}
 
+		void Application::insertDataWindow_collectImageProperties()
+		{
+			imageProperties = hn::backend::ImageProperties();
+			const auto& sceneTypeWidgets = insertData_DynamicCheckbox_SceneType->getWidgets();
+			for (const auto& iterator : sceneTypeWidgets)
+			{
+				if (iterator.get_active())
+				{
+					std::string label = iterator.get_label();
+					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+					imageProperties.sceneType.push_back(label);
+				}
+			}
+		}
+
 		void Application::showPreviewJsonWindow()
 		{
+			insertDataWindow_collectImageProperties();
 			previewJson_TextBuffer->set_text(imageProperties.ExportJson());
 			previewJson_Window->show_all();
 		}

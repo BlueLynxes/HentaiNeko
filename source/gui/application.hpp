@@ -28,13 +28,14 @@ namespace hn
 			void insertDataWindow_buttonPreviewNext();
 			void insertDataWindow_buttonPreviewPrevious();
 			void insertDataWindow_General_SceneType_AddLabel();
+			void insertDataWindow_collectImageProperties();
 			// Preview Json Window
 			void initPreviewJsonWindow();
 			void showPreviewJsonWindow();
 		private:
 			Glib::RefPtr<Gtk::Application> application;
 			hn::backend::CollectionScanner collectionScanner = hn::backend::CollectionScanner("../resources");
-			hn::backend::ImageProperties imageProperties = hn::backend::ImageProperties();
+			hn::backend::ImageProperties imageProperties;
 
 			// For the moment the Main Window, in the future
 			// the main Window will be a greeter/collection display
@@ -61,7 +62,7 @@ namespace hn
 			Gtk::Button* insertData_Button_General_SceneType;
 			Gtk::ListBox* insertData_ListBox_General_SceneType;
 			Gtk::Box* insertData_Box_General_SceneType;
-			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton, bool>* insertData_DynamicCheckbox_SceneType;
+			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_DynamicCheckbox_SceneType;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;
