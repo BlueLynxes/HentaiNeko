@@ -338,3 +338,31 @@ More info soon hopefully!
     Essentially, instead of having the user create the button, how about the Widget the user adds is not directly added within the
     list, but rather it is added inside an horizontal box which will contain both the custom widget and a button on the right to
     delete the widget (which is also going to delete the label from the custom defined tags file).
+
+  **Update 0.8.2.4**
+   - Added an encapsulation system to wrap the custom widget in a horizontal box with a delete button (which for now does nothing)
+   - Updated the `getWidgets` method of the `DynamicCheckbox` to iterate inside the vector containing the widgets (aka the horizontal
+     boxes) and extract the user defined widget.
+     
+     Little note tho, now said vector contains pointers.
+     This is still slower since we are effectively creating a new vector, but the memory waste is minimum since it's a vector of
+     pointers (I fought with my life for it to be references, but failed) and it gets *supposedly* moved to the caller function.
+
+     Of course since now we're dealing with pointers, the syntax changes a bit... but nothing major (just use `->` instead of `.` or
+     dereference the pointers with `*`).
+
+ Next Steps:
+  - Add callback to remove row.
+    
+    I do have an idea on how to do this already. Apparently using `sigc::bind` it is possible to give an argument to a callback
+    which means that we can effectively have a single callback function, which will then be called by every button.
+
+    The only extra step is using `std::bind` and giving the correct index to remove the correct row. But this is also pretty easy!
+    All we need to do is give it the iterator of the last item of the `listboxItems` vector, so that when we want to delete it, we
+    already have the correct iterator.
+
+    However there some questions to wether that's possible or not, does the function calling the callback actually support something
+    like that, or only literals? And what about when I delete an element, wouldn't the vector point to the wrong element then, and
+    make the application crash if pointing to something out of bounds?
+
+    Maybe I had more of a hunch than an idea, so yeah... so more thinking to do here. However, a step forward.
