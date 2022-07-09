@@ -53,21 +53,34 @@ namespace hn
 			{
 				if (entry.get_text() != "")
 				{
-					listboxItems.push_back(WidgetType(entry.get_text()));
-					listboxItems.back().show_all();
-					addWidget(listboxItems.back());
+					WidgetType* widget = new WidgetType(entry.get_text());
+					addWidget(*widget);
 					entry.set_text("");
 				}
 			}
 
 			void addWidget(WidgetType& widget)
 			{
-				listbox.add(widget);
+				//Gtk::Box newItem = Gtk::Box();
+				listboxItems.push_back(Gtk::Box());
+				listboxItems.back().pack_start(widget, true, true, 0);
+				Gtk::Button* button = new Gtk::Button();
+				Gtk::Image* deleteItemIcon = new Gtk::Image(Gtk::StockID("gtk-close"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
+				button->add(*deleteItemIcon);
+				listboxItems.back().pack_end(*button, false, false, 0);
+				listboxItems.back().show_all();
+				listboxItems.back().show_all();
+				listbox.add(listboxItems.back());
 			}
 
-			const std::vector<WidgetType>& getWidgets()
+			const std::vector<WidgetType*> getWidgets()
 			{
-				return listboxItems;
+				std::vector<WidgetType*> itemsReferences;
+				for (const auto& iterator : listboxItems)
+				{
+					itemsReferences.push_back((WidgetType*)iterator.get_children().front());
+				}
+				return std::move(itemsReferences);
 			}
 
 			Gtk::Widget& operator()()
@@ -75,7 +88,7 @@ namespace hn
 				return mainContainer;
 			}
 		private:
-			std::vector<WidgetType> listboxItems;
+			std::vector<Gtk::Box> listboxItems;
 			Gtk::Box mainContainer;
 			Gtk::ScrolledWindow scrolledWindow;
 			Gtk::Viewport viewport;

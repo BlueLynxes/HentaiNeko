@@ -218,12 +218,12 @@ namespace hn
 		void Application::insertDataWindow_collectImageProperties()
 		{
 			imageProperties = hn::backend::ImageProperties();
-			const auto& sceneTypeWidgets = insertData_DynamicCheckbox_SceneType->getWidgets();
+			const auto sceneTypeWidgets = insertData_DynamicCheckbox_SceneType->getWidgets();
 			for (const auto& iterator : sceneTypeWidgets)
 			{
-				if (iterator.get_active())
+				if (iterator->get_active())
 				{
-					std::string label = iterator.get_label();
+					std::string label = iterator->get_label();
 					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
 					imageProperties.sceneType.push_back(label);
 				}
