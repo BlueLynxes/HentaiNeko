@@ -69,7 +69,6 @@ namespace hn
 				button->add(*deleteItemIcon);
 				listboxItems.back().pack_end(*button, false, false, 0);
 				listboxItems.back().show_all();
-				listboxItems.back().show_all();
 				listbox.add(listboxItems.back());
 			}
 
