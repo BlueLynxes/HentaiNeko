@@ -53,15 +53,33 @@ namespace hn
 				mainContainer.add(entryBox);
 
 				addEntryButton.signal_clicked().connect(sigc::mem_fun(*this, &DynamicCheckbox::addEntryButtonCallback));
+				addEntryButton.set_tooltip_text("Empty entry or item already present");
+				addEntryButton.set_sensitive(false);
+				entry.signal_changed().connect(sigc::mem_fun(*this, &DynamicCheckbox::lockAddButton));
 			}
 
 			void addEntryButtonCallback()
 			{
-				if (entry.get_text() != "")
+				if (entry.get_text() != "" && !(findListItem(entry.get_text()) != listboxItems.end()))
 				{
 					WidgetType* widget = initWidgetLogic(entry.get_text());
 					addWidget(*widget);
 					entry.set_text("");
+				}
+			}
+
+			// This is called just for a graphical reason, the actual check is still done on button click
+			void lockAddButton()
+			{
+				if (entry.get_text() == "" || findListItem(entry.get_text()) != listboxItems.end())
+				{
+					addEntryButton.set_tooltip_text("Empty entry or item already present");
+					addEntryButton.set_sensitive(false);
+				}
+				else
+				{
+					addEntryButton.set_tooltip_text("Add new item");
+					addEntryButton.set_sensitive(true);
 				}
 			}
 
