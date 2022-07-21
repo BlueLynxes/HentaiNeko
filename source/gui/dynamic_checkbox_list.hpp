@@ -3,6 +3,7 @@
 #include <gtkmm.h>
 #include <vector>
 #include <utility>
+#include <iostream>
 
 namespace hn
 {
@@ -12,7 +13,10 @@ namespace hn
 		class DynamicCheckbox
 		{
 		public:
-			DynamicCheckbox(const std::string& placeholderText = std::string("Add a new tag :3")) :
+			DynamicCheckbox(std::function<std::function<bool(Gtk::Box&)>(const std::string&)> comparisonLogic,
+							const std::string& placeholderText = std::string("Add a new tag :3")
+			) :
+				comparisonLogic{ comparisonLogic },
 				mainContainer{ Gtk::Box() },
 				scrolledWindow{ Gtk::ScrolledWindow() },
 				viewport{ Gtk::Viewport(scrolledWindow.get_hadjustment(), scrolledWindow.get_vadjustment()) },
@@ -61,7 +65,7 @@ namespace hn
 
 			void addWidget(WidgetType& widget)
 			{
-				//Gtk::Box newItem = Gtk::Box();
+				//This should call findListItem to check if the item already exist, but how to extract the label from a custom element?
 				listboxItems.push_back(Gtk::Box());
 				listboxItems.back().pack_start(widget, true, true, 0);
 				Gtk::Button* button = new Gtk::Button();
@@ -82,11 +86,19 @@ namespace hn
 				return std::move(itemsReferences);
 			}
 
+			// For now this only works with Gtk::CheckButton
+			const std::vector<Gtk::Box>::iterator findListItem(const std::string& itemLabel)
+			{
+				std::vector<Gtk::Box>::iterator foundElement = std::find_if(listboxItems.begin(), listboxItems.end(), comparisonLogic(itemLabel));
+				return foundElement;
+			}
+
 			Gtk::Widget& operator()()
 			{
 				return mainContainer;
 			}
 		private:
+			std::function<std::function<bool(Gtk::Box&)>(const std::string&)> comparisonLogic;
 			std::vector<Gtk::Box> listboxItems;
 			Gtk::Box mainContainer;
 			Gtk::ScrolledWindow scrolledWindow;

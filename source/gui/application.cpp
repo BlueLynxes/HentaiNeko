@@ -193,7 +193,17 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::ListBox>("insert_general_scenetype_listbox", insertData_ListBox_General_SceneType);
 
 			insertData_Builder->get_widget<Gtk::Box>("general-scenetype-page", insertData_Box_General_SceneType);
-			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>("New scene type");
+			std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkValue = [](const std::string& label)
+			{
+				return [&label](Gtk::Box& item) -> bool {
+					if (((Gtk::CheckButton*)item.get_children().front())->get_label() == label)
+					{
+						return true;
+					}
+					return false;
+				};
+			};
+			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(checkValue, "New scene type");
 			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
 		}
 
