@@ -203,7 +203,12 @@ namespace hn
 					return false;
 				};
 			};
-			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(checkValue, "New scene type");
+			std::function<Gtk::CheckButton* (const std::string&)> addWidget = [](const std::string& label) -> Gtk::CheckButton*
+			{
+				return new Gtk::CheckButton(label);
+			};
+			addWidget("hello");
+			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New scene type");
 			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
 		}
 
