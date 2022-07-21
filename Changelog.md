@@ -323,3 +323,48 @@
     make the application crash if pointing to something out of bounds?
 
     Maybe I had more of a hunch than an idea, so yeah... so more thinking to do here. However, a step forward.
+
+  **Update 0.8.2.5**
+   - Added custom init logic for custom widget
+     Now a lambda must be defined to init the widget, the lambda must accept a `std::string&` as a parameter (which is the entry text)
+     and can then perform all the various init operation (this solves the constructor problem)
+     ``` cpp
+     // Example
+     // Must return a pointer of the type of the given widget type, must take std::string& as parameter
+     	std::function<Gtk::CheckButton* (const std::string&)> addWidget = [](const std::string& label) -> Gtk::CheckButton*
+			{
+				return new Gtk::CheckButton(label);
+			};
+     ```
+   - Added search function
+     Just like the init logic lambda now there is a search function that does however require a lambda with the search logic provided.
+     Unfortunately I had to use some _"tricks"_ to pass all the arguments correctly, so essentially, there is a template to follow:
+     ``` cpp
+     	std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkValue = [](const std::string& label)
+			{
+				return [&label](Gtk::Box& item) -> bool {
+          // Custom matching logic
+          // Usually only modifying the if statement to get the correct label from the used widget should be enough
+					if (((Gtk::CheckButton*)item.get_children().front())->get_label() == label)
+					{
+						return true;
+					}
+					return false;
+				};
+			};
+     ```
+     As you can see this is a bit of a weird lambda, it is a lambda that returns another lambda, the reason is that the internal lambda
+     has to be passed to `std::find_id`, which calls the lambda only giving 1 parameter (a `Gtk::Box&`), however, the comparison must
+     be made against whatever is currently on the entry, which means, against another `std::string&`, however, this cannot be caught
+     since what the lambda catches wouyld be in a different scope.
+
+     So essentially, the solution is a wrapper lambda which doesn't capture anything but does receive the `std::string&` as an argument,
+     then it returns another lambda which can now capture said `std::string&` and must return `bool`, allowing us to provide the custom
+     string to match against and receive the provided  `Gtk::Reference&` from `std::find_if`. Probably not the most elegant way of solving this, but it works.
+   - Added check if entry content is a duplicate of an item in the list and if so grey out button and lock addition.
+     _Note: those are two different checks, one greyes out the button, but the adding function also checks for duplicates on it's own, this may or may not be useless, it is however a double search. I'm not sure wether greying out a button guarantees that it cannot be used... it should, I guess._
+
+ Next Steps:
+  - Implementing the delete button, now that the search function exists and it works it should be pretty easy to just give whatever iterator that spits out a single callback function used by every button, which will simply pass it's label content as an argument.
+  - Complete the UI implementation (creating this customn widget took a long time, but it's used about everywhere)
+  - Get all the values from the various UI element and init JSON
