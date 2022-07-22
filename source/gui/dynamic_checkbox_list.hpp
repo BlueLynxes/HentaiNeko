@@ -90,10 +90,28 @@ namespace hn
 				listboxItems.back().pack_start(widget, true, true, 0);
 				Gtk::Button* button = new Gtk::Button();
 				Gtk::Image* deleteItemIcon = new Gtk::Image(Gtk::StockID("gtk-close"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
+				button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &DynamicCheckbox::deleteWidgetCallback), entry.get_text()));
 				button->add(*deleteItemIcon);
 				listboxItems.back().pack_end(*button, false, false, 0);
 				listboxItems.back().show_all();
 				listbox.add(listboxItems.back());
+			}
+
+			void deleteWidgetCallback(const std::string& label)
+			{
+				auto it = findListItem(label);
+				deleteWidget(it);
+			}
+
+			void deleteWidget(const std::vector<Gtk::Box>::iterator& itemToDelete)
+			{
+				if (itemToDelete != listboxItems.end())
+				{
+					// There are always only 2 childs, so running this same line twice works fine
+					itemToDelete->remove(*(itemToDelete->get_children().front()));
+					itemToDelete->remove(*(itemToDelete->get_children().front()));
+					listboxItems.erase(itemToDelete);
+				}
 			}
 
 			const std::vector<WidgetType*> getWidgets()
