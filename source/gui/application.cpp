@@ -18,7 +18,7 @@ namespace hn
 		{
 			// NOTE: This is temporary, the window to run should be the main Window
 			// Other Windows will be spawned via events separately when needed by the user
-			this->application->run(*this->insertData_Window);
+			this->application->run(*this->insertData_Window.get());
 		}
 
 		void Application::initAboutWindow()
@@ -107,7 +107,7 @@ namespace hn
 			{
 				insertData_picturesIndex++;
 				insertData_Box_previewBox->remove(*insertData_Box_previewBox->get_children().front());
-				//delete insertData_imagePreviewer;
+				delete insertData_imagePreviewer;
 				insertData_imagePreviewer = new hn::gui::ImagePreviewer(*insertData_picturesIndex, Glib::RefPtr<Gtk::Window>(insertData_Window));
 				insertData_imagePreviewer->show();
 				insertData_Box_previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
@@ -121,7 +121,7 @@ namespace hn
 			{
 				insertData_picturesIndex--;
 				insertData_Box_previewBox->remove(*insertData_Box_previewBox->get_children().front());
-				//delete insertData_imagePreviewer;
+				delete insertData_imagePreviewer;
 				insertData_imagePreviewer = new hn::gui::ImagePreviewer(*insertData_picturesIndex, Glib::RefPtr<Gtk::Window>(insertData_Window));
 				insertData_imagePreviewer->show();
 				insertData_Box_previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
@@ -155,7 +155,9 @@ namespace hn
 		void Application::initInsertDataWindow()
 		{
 			insertData_Builder = Gtk::Builder::create_from_file("../ui/HentaiNeko.glade");
-			insertData_Builder->get_widget<Gtk::Window>("main_window", insertData_Window);
+			Gtk::Window* insertData_Window_rawptr = nullptr;
+			insertData_Builder->get_widget<Gtk::Window>("main_window", insertData_Window_rawptr);
+			insertData_Window = Glib::RefPtr<Gtk::Window>(insertData_Window_rawptr);
 			insertData_Builder->get_widget<Gtk::HeaderBar>("header", insertData_HeaderBar);
 			insertData_Window->set_titlebar(*insertData_HeaderBar);
 

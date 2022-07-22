@@ -43,7 +43,7 @@ namespace hn
 			// future those component will each have it's own UI file.
 			// For the moment those are useless/wasteful.
 			Glib::RefPtr<Gtk::Builder> insertData_Builder;
-			Gtk::Window* insertData_Window;
+			Glib::RefPtr<Gtk::Window> insertData_Window;
 			Gtk::HeaderBar* insertData_HeaderBar;
 			Gtk::Button* insertData_Button_ShowAboutWindow;
 			Gtk::Button* insertData_Button_OpenEntryPointPickerDialogue;
