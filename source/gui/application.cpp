@@ -209,7 +209,6 @@ namespace hn
 			{
 				return new Gtk::CheckButton(label);
 			};
-			addWidget("hello");
 			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New scene type");
 			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
 		}
