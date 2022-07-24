@@ -61,6 +61,8 @@ namespace hn
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_DynamicCheckbox_SceneType;
 			Gtk::Box* insertData_Box_Setting_LocationProperties;
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Setting_LocationProperties;
+			Gtk::Box* insertData_Box_Genres;
+			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Genres;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;

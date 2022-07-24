@@ -199,6 +199,10 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-setting-locationproperties", insertData_Box_Setting_LocationProperties);
 			insertData_Setting_LocationProperties = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New location property");
 			insertData_Box_Setting_LocationProperties->add((* insertData_Setting_LocationProperties)());
+
+			insertData_Builder->get_widget<Gtk::Box>("insertwindow-genres", insertData_Box_Genres);
+			insertData_Genres = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New genre");
+			insertData_Box_Genres->add((*insertData_Genres)());
 		}
 
 		void Application::showInsertDataWindow()
@@ -240,6 +244,16 @@ namespace hn
 					std::string label = iterator->get_label();
 					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
 					imageProperties.setting.locationProperties.push_back(label);
+				}
+			}
+			const auto genresWidgets = insertData_Genres->getWidgets();
+			for (const auto& iterator : genresWidgets)
+			{
+				if (iterator->get_active())
+				{
+					std::string label = iterator->get_label();
+					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+					imageProperties.genres.push_back(label);
 				}
 			}
 		}
