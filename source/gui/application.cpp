@@ -207,6 +207,10 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-tags", insertData_Box_Tags);
 			insertData_Tags = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New tag");
 			insertData_Box_Tags->add((*insertData_Tags)());
+
+			insertData_Builder->get_widget<Gtk::ComboBoxText>("insertwindow-setting-timeofday", insertData_ComboBoxText_Setting_TimeOfDay);
+			insertData_Builder->get_widget<Gtk::ComboBoxText>("insertwindow-setting-season", insertData_ComboBoxText_Setting_Season);
+			insertData_Builder->get_widget<Gtk::Entry>("insertwindow-setting-light", insertData_ComboBoxText_Setting_Light);
 		}
 
 		void Application::showInsertDataWindow()
@@ -270,6 +274,9 @@ namespace hn
 					imageProperties.tags.push_back(label);
 				}
 			}
+			imageProperties.setting.time = insertData_ComboBoxText_Setting_TimeOfDay->get_active_text();
+			imageProperties.setting.season = insertData_ComboBoxText_Setting_Season->get_active_text();
+			imageProperties.setting.light = insertData_ComboBoxText_Setting_Light->get_text();
 		}
 
 		void Application::showPreviewJsonWindow()
