@@ -107,9 +107,7 @@ namespace hn
 			{
 				if (itemToDelete != listboxItems.end())
 				{
-					// There are always only 2 childs, so running this same line twice works fine
-					itemToDelete->remove(*(itemToDelete->get_children().front()));
-					itemToDelete->remove(*(itemToDelete->get_children().front()));
+					itemToDelete->get_parent()->get_parent()->remove(*itemToDelete->get_parent());
 					listboxItems.erase(itemToDelete);
 				}
 			}
