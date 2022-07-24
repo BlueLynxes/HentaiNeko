@@ -368,3 +368,39 @@
   - Implementing the delete button, now that the search function exists and it works it should be pretty easy to just give whatever iterator that spits out a single callback function used by every button, which will simply pass it's label content as an argument.
   - Complete the UI implementation (creating this customn widget took a long time, but it's used about everywhere)
   - Get all the values from the various UI element and init JSON
+
+  **Update 0.8.2.6**
+  - Implemented delete button for custom entry in the `DynamicCheckboxList` which still needs to be renamed.
+  - Fixed `ImagePreviewer` huge memory leak (check issue on GitHub for extra info TL;DR use smart pointer and don't be lazy)
+
+ Next Steps:
+  - Fix various smaller leaks around the app:
+    As it turns out, no, `remove` a method found in Gtk containers **does not** deallocate memory, so either complement that with a
+    `delete` or leverage smart pointers.
+  - Convert everything to smart pointers:
+    I'm primarily referring here to the `inputWindow` more than *everything*, the reason why is that right now nothign gets deallocated,
+    this following the principle and idea that anyway that is the only window and if that get's closed the whole program gets closed
+    and the memory gets deallocated by the kernel directly, however this won't always be the case and the app should be ready for that.
+
+    To be fair, as of right now the windows can be shown or hidden, it is always allocated (with minimal RAM usage) but this is
+    technically faster since everything is already in place and the windows just needs to be shown. Probably however reallocating
+    everything takes so short that you can't even see it, so it would make more sense to just not waste RAM.
+  - Complete the UI implementation:
+    Meaning put the widget that we (for the moment I tbh) put so much blood, sweat and tears into and populate the UI.
+  - Collect all input data from the UI and compose the final JSON:
+    Essentially just collect all the input data and use the already defined json object
+  - Write the JSON in the picture metadata
+
+  **Update 0.8.3**
+  - Completed *"General"* section implementation (kinda):
+    - Still missing initializazion of the widgets via the defaults file (this should be done vefore `v1.0`)
+    - Still missing all the auto-completion (which anyway is a more advanced thing that is planned for later on)
+
+    What has been done?
+    - All widgets are present
+    - The function to compose the JSON reads the data from all the widgets
+
+  Next Steps:
+  - Implementing defaults inits
+  - Implementing the *"Characters"* section
+  - ***Sleep*** *hey, it's 3:25 AM, I think I deserve a bit of rest! Good Night :3*
