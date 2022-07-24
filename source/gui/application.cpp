@@ -1,6 +1,5 @@
 #include "application.hpp"
 #include <thread>
-#include <iostream>
 
 namespace hn
 {
