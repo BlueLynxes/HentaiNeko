@@ -3,6 +3,7 @@
 
 #include "../backend/collection_scanner.hpp"
 #include "../backend/image_properties.hpp"
+#include "../backend/tags_config.hpp"
 #include "image_previewer.hpp"
 #include "dynamic_checkbox_list.hpp"
 
@@ -41,6 +42,9 @@ namespace hn
 			// NOTE: I'm making one builder per component, since in the
 			// future those component will each have it's own UI file.
 			// For the moment those are useless/wasteful.
+			
+			// This string should be passed as argument from main after reading it from a config file
+			hn::backend::TagsConfig config_DefaultTags = hn::backend::TagsConfig("../config/templates/tags-configs.jsonc");
 			Glib::RefPtr<Gtk::Builder> insertData_Builder;
 			Glib::RefPtr<Gtk::Window> insertData_Window;
 			Gtk::HeaderBar* insertData_HeaderBar;

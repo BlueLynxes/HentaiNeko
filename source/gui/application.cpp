@@ -193,18 +193,38 @@ namespace hn
 
 			insertData_Builder->get_widget<Gtk::Box>("general-scenetype-page", insertData_Box_General_SceneType);
 			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New scene type");
+			for (const auto& sceneType : config_DefaultTags.sceneType)
+			{
+				Gtk::CheckButton* item = addWidget(sceneType);
+				insertData_DynamicCheckbox_SceneType->addWidget(*item, sceneType);
+			}
 			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
 			
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-setting-locationproperties", insertData_Box_Setting_LocationProperties);
 			insertData_Setting_LocationProperties = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New location property");
+			for (const auto& locationProperty : config_DefaultTags.setting.locationProperties)
+			{
+				Gtk::CheckButton* item = addWidget(locationProperty);
+				insertData_Setting_LocationProperties->addWidget(*item, locationProperty);
+			}
 			insertData_Box_Setting_LocationProperties->add((* insertData_Setting_LocationProperties)());
 
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-genres", insertData_Box_Genres);
 			insertData_Genres = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New genre");
+			for (const auto& genre : config_DefaultTags.genres)
+			{
+				Gtk::CheckButton* item = addWidget(genre);
+				insertData_Genres->addWidget(*item, genre);
+			}
 			insertData_Box_Genres->add((*insertData_Genres)());
 
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-tags", insertData_Box_Tags);
 			insertData_Tags = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New tag");
+			for (const auto& tag : config_DefaultTags.tags)
+			{
+				Gtk::CheckButton* item = addWidget(tag);
+				insertData_Tags->addWidget(*item, tag);
+			}
 			insertData_Box_Tags->add((*insertData_Tags)());
 
 			insertData_Builder->get_widget<Gtk::ComboBoxText>("insertwindow-setting-timeofday", insertData_ComboBoxText_Setting_TimeOfDay);
