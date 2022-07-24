@@ -15,8 +15,8 @@ namespace hn
 			JSONCPP_STRING err;
 			const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
 			if (!reader->parse(json.c_str(), json.c_str() + json.length(), &root, &err)) {
-				std::cout << "error" << std::endl;
-				std::cout << json << std::endl;
+				std::cerr << "error" << std::endl;
+				std::cerr << err << std::endl;
 				throw std::exception();
 			}
 
