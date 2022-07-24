@@ -16,6 +16,7 @@ namespace hn
 			ImageProperties() = default;
 			ImageProperties(const std::string& json);
 
+			void parseJson(const std::string& json);
 			std::string ExportJson();
 
 		public:

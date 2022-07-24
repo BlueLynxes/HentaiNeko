@@ -1,7 +1,6 @@
 #include "image_properties.hpp"
 #include <json/json.h>
-
-#include <iostream>
+#include <stdexcept>
 
 namespace hn
 {
@@ -9,15 +8,18 @@ namespace hn
 	{
 		ImageProperties::ImageProperties(const std::string& json)
 		{
+			parseJson(json);
+		}
+
+		void ImageProperties::parseJson(const std::string& json)
+		{
 			Json::Value root;
 			// Parse JSON
 			Json::CharReaderBuilder builder;
 			JSONCPP_STRING err;
 			const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
 			if (!reader->parse(json.c_str(), json.c_str() + json.length(), &root, &err)) {
-				std::cerr << "error" << std::endl;
-				std::cerr << err << std::endl;
-				throw std::exception();
+				throw std::runtime_error("Error" + err + "\n\n--- BEGIN ERROR JSON ---" + json + "--- END RROR JSON ---");
 			}
 
 			// Populate Object
@@ -82,7 +84,7 @@ namespace hn
 				}
 				this->setting = imageSetting;
 			}
-			
+
 			if (root["characters"].isArray())
 			{
 				Json::Value charactersArray = root["characters"];
