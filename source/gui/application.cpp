@@ -203,6 +203,10 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-genres", insertData_Box_Genres);
 			insertData_Genres = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New genre");
 			insertData_Box_Genres->add((*insertData_Genres)());
+
+			insertData_Builder->get_widget<Gtk::Box>("insertwindow-tags", insertData_Box_Tags);
+			insertData_Tags = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New tag");
+			insertData_Box_Tags->add((*insertData_Tags)());
 		}
 
 		void Application::showInsertDataWindow()
@@ -254,6 +258,16 @@ namespace hn
 					std::string label = iterator->get_label();
 					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
 					imageProperties.genres.push_back(label);
+				}
+			}
+			const auto tagsWidgets = insertData_Tags->getWidgets();
+			for (const auto& iterator : tagsWidgets)
+			{
+				if (iterator->get_active())
+				{
+					std::string label = iterator->get_label();
+					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+					imageProperties.tags.push_back(label);
 				}
 			}
 		}
