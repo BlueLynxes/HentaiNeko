@@ -3,6 +3,7 @@
 #include <gtkmm.h>
 #include <vector>
 #include <utility>
+#include <optional>
 #include <iostream>
 
 namespace hn
@@ -83,14 +84,21 @@ namespace hn
 				}
 			}
 
-			void addWidget(WidgetType& widget)
+			void addWidget(WidgetType& widget, std::optional<const std::string> label = {})
 			{
 				//This should call findListItem to check if the item already exist, but how to extract the label from a custom element?
 				listboxItems.push_back(Gtk::Box());
 				listboxItems.back().pack_start(widget, true, true, 0);
 				Gtk::Button* button = new Gtk::Button();
 				Gtk::Image* deleteItemIcon = new Gtk::Image(Gtk::StockID("gtk-close"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
-				button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &DynamicCheckbox::deleteWidgetCallback), entry.get_text()));
+				if (label.has_value())
+				{
+					button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &DynamicCheckbox::deleteWidgetCallback), label.value()));
+				}
+				else
+				{
+					button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &DynamicCheckbox::deleteWidgetCallback), entry.get_text()));
+				}
 				button->add(*deleteItemIcon);
 				listboxItems.back().pack_end(*button, false, false, 0);
 				listboxItems.back().show_all();
