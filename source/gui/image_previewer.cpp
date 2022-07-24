@@ -3,8 +3,27 @@
 hn::gui::ImagePreviewer::ImagePreviewer(const std::string& imagePath, Glib::RefPtr<Gtk::Window> parentWindow)
 {
 	this->parentWindow = parentWindow;
-	imageBuf = Gdk::Pixbuf::create_from_file(imagePath);
-	imageSurface = Gdk::Cairo::create_surface_from_pixbuf(imageBuf, 1, this->parentWindow->get_window());
+	//Glib::add_exception_handler(sigc::mem_fun(*this, &ImagePreviewer::unsupportedFormatExceptionHandler));
+	try
+	{
+		imageBuf = Gdk::Pixbuf::create_from_file(imagePath);
+		imageSurface = Gdk::Cairo::create_surface_from_pixbuf(imageBuf, 1, this->parentWindow->get_window());
+	}
+	catch (...)
+	{
+		imageBuf.reset();
+		imageSurface.clear();
+		imageBuf = Gdk::Pixbuf::create_from_file("../resources/previewFallback.png");
+		imageSurface = Gdk::Cairo::create_surface_from_pixbuf(imageBuf, 1, this->parentWindow->get_window());
+		Gtk::MessageDialog dialog = Gtk::MessageDialog(
+			"Could not recognize the image file format",
+			false,
+			Gtk::MessageType::MESSAGE_ERROR,
+			Gtk::ButtonsType::BUTTONS_OK,
+			true
+		);
+		dialog.run();
+	}
 }
 
 bool hn::gui::ImagePreviewer::on_draw(const Cairo::RefPtr<Cairo::Context>& context)
