@@ -27,7 +27,6 @@ namespace hn
 			void insertDataWindow_updateImagePreviewerLabels();
 			void insertDataWindow_buttonPreviewNext();
 			void insertDataWindow_buttonPreviewPrevious();
-			void insertDataWindow_General_SceneType_AddLabel();
 			void insertDataWindow_collectImageProperties();
 			// Preview Json Window
 			void initPreviewJsonWindow();
@@ -58,9 +57,6 @@ namespace hn
 			Gtk::Label* insertData_Label_currentImagePath;
 			Gtk::Box* insertData_Box_previewBox;
 			Gtk::Button* insertData_Button_openJsonPreview;
-			Gtk::Entry* insertData_Entry_General_SceneType;
-			Gtk::Button* insertData_Button_General_SceneType;
-			Gtk::ListBox* insertData_ListBox_General_SceneType;
 			Gtk::Box* insertData_Box_General_SceneType;
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_DynamicCheckbox_SceneType;
 
