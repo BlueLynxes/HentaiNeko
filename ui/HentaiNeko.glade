@@ -2660,109 +2660,12 @@ Free today, free forever</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkScrolledWindow">
+                                          <object class="GtkBox" id="insertwindow-setting-locationproperties">
                                             <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="shadow-type">in</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="orientation">vertical</property>
                                             <child>
-                                              <object class="GtkViewport">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="hexpand">True</property>
-                                                <property name="vexpand">True</property>
-                                                <child>
-                                                  <object class="GtkListBox">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="valign">baseline</property>
-                                                    <property name="selection-mode">none</property>
-                                                    <child>
-                                                      <object class="GtkListBoxRow">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">True</property>
-                                                        <child>
-                                                          <object class="GtkCheckButton">
-                                                            <property name="label" translatable="yes">Indoor</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">False</property>
-                                                            <property name="margin-left">5</property>
-                                                            <property name="margin-right">5</property>
-                                                            <property name="margin-start">5</property>
-                                                            <property name="margin-end">5</property>
-                                                            <property name="margin-top">5</property>
-                                                            <property name="margin-bottom">5</property>
-                                                            <property name="draw-indicator">True</property>
-                                                          </object>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkListBoxRow">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">True</property>
-                                                        <child>
-                                                          <object class="GtkCheckButton">
-                                                            <property name="label" translatable="yes">Outdoor</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">False</property>
-                                                            <property name="margin-left">5</property>
-                                                            <property name="margin-right">5</property>
-                                                            <property name="margin-start">5</property>
-                                                            <property name="margin-end">5</property>
-                                                            <property name="margin-top">5</property>
-                                                            <property name="margin-bottom">5</property>
-                                                            <property name="draw-indicator">True</property>
-                                                          </object>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkListBoxRow">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">True</property>
-                                                        <child>
-                                                          <object class="GtkCheckButton">
-                                                            <property name="label" translatable="yes">House</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">False</property>
-                                                            <property name="margin-left">5</property>
-                                                            <property name="margin-right">5</property>
-                                                            <property name="margin-start">5</property>
-                                                            <property name="margin-end">5</property>
-                                                            <property name="margin-top">5</property>
-                                                            <property name="margin-bottom">5</property>
-                                                            <property name="draw-indicator">True</property>
-                                                          </object>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkListBoxRow">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">True</property>
-                                                        <child>
-                                                          <object class="GtkCheckButton">
-                                                            <property name="label" translatable="yes">School</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">False</property>
-                                                            <property name="margin-left">5</property>
-                                                            <property name="margin-right">5</property>
-                                                            <property name="margin-start">5</property>
-                                                            <property name="margin-end">5</property>
-                                                            <property name="margin-top">5</property>
-                                                            <property name="margin-bottom">5</property>
-                                                            <property name="draw-indicator">True</property>
-                                                          </object>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-                                              </object>
+                                              <placeholder/>
                                             </child>
                                           </object>
                                           <packing>
@@ -2781,49 +2684,6 @@ Free today, free forever</property>
                                             <property name="fill">True</property>
                                             <property name="padding">5</property>
                                             <property name="position">4</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="spacing">5</property>
-                                            <child>
-                                              <object class="GtkEntry">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">True</property>
-                                                <property name="placeholder-text" translatable="yes">New location property</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">True</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkButton">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">True</property>
-                                                <property name="receives-default">True</property>
-                                                <child>
-                                                  <object class="GtkImage">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="stock">gtk-add</property>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">5</property>
                                           </packing>
                                         </child>
                                       </object>

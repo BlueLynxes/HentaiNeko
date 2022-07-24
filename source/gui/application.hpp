@@ -59,6 +59,8 @@ namespace hn
 			Gtk::Button* insertData_Button_openJsonPreview;
 			Gtk::Box* insertData_Box_General_SceneType;
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_DynamicCheckbox_SceneType;
+			Gtk::Box* insertData_Box_Setting_LocationProperties;
+			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Setting_LocationProperties;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;

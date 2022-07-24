@@ -176,7 +176,7 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::Button>("check_json_preview_button", insertData_Button_openJsonPreview);
 			insertData_Button_openJsonPreview->signal_clicked().connect(sigc::mem_fun(*this, &Application::showPreviewJsonWindow));
 
-			insertData_Builder->get_widget<Gtk::Box>("general-scenetype-page", insertData_Box_General_SceneType);
+			// These can be used for all similar DynamicCheckbox widgets
 			std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkValue = [](const std::string& label)
 			{
 				return [&label](Gtk::Box& item) -> bool {
@@ -191,8 +191,14 @@ namespace hn
 			{
 				return new Gtk::CheckButton(label);
 			};
+
+			insertData_Builder->get_widget<Gtk::Box>("general-scenetype-page", insertData_Box_General_SceneType);
 			insertData_DynamicCheckbox_SceneType = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New scene type");
 			insertData_Box_General_SceneType->add((* insertData_DynamicCheckbox_SceneType)());
+			
+			insertData_Builder->get_widget<Gtk::Box>("insertwindow-setting-locationproperties", insertData_Box_Setting_LocationProperties);
+			insertData_Setting_LocationProperties = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New location property");
+			insertData_Box_Setting_LocationProperties->add((* insertData_Setting_LocationProperties)());
 		}
 
 		void Application::showInsertDataWindow()
@@ -224,6 +230,16 @@ namespace hn
 					std::string label = iterator->get_label();
 					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
 					imageProperties.sceneType.push_back(label);
+				}
+			}
+			const auto locationPropertiesWidgets = insertData_Setting_LocationProperties->getWidgets();
+			for (const auto& iterator : locationPropertiesWidgets)
+			{
+				if (iterator->get_active())
+				{
+					std::string label = iterator->get_label();
+					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+					imageProperties.setting.locationProperties.push_back(label);
 				}
 			}
 		}
