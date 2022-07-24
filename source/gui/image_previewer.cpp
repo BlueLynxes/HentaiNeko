@@ -9,7 +9,7 @@ hn::gui::ImagePreviewer::ImagePreviewer(const std::string& imagePath, Glib::RefP
 		imageBuf = Gdk::Pixbuf::create_from_file(imagePath);
 		imageSurface = Gdk::Cairo::create_surface_from_pixbuf(imageBuf, 1, this->parentWindow->get_window());
 	}
-	catch (...)
+	catch (Glib::Exception& e)
 	{
 		imageBuf.reset();
 		imageSurface.clear();
