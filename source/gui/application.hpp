@@ -65,6 +65,8 @@ namespace hn
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_DynamicCheckbox_SceneType;
 			Gtk::Box* insertData_Box_Setting_LocationProperties;
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Setting_LocationProperties;
+			Gtk::Box* insertData_Box_Setting_LocationItems;
+			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Setting_LocationItems;
 			Gtk::ComboBoxText* insertData_ComboBoxText_Setting_TimeOfDay;
 			Gtk::ComboBoxText* insertData_ComboBoxText_Setting_Season;
 			Gtk::Entry* insertData_ComboBoxText_Setting_Light;

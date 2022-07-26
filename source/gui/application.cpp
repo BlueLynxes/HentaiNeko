@@ -209,6 +209,15 @@ namespace hn
 			}
 			insertData_Box_Setting_LocationProperties->add((* insertData_Setting_LocationProperties)());
 
+			insertData_Builder->get_widget<Gtk::Box>("insertwindow-setting-locationitems", insertData_Box_Setting_LocationItems);
+			insertData_Setting_LocationItems = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New item");
+			for (const auto& locationItem : config_DefaultTags.setting.locationItems)
+			{
+				Gtk::CheckButton* item = addWidget(locationItem);
+				insertData_Setting_LocationItems->addWidget(*item, locationItem);
+			}
+			insertData_Box_Setting_LocationItems->add((* insertData_Setting_LocationItems)());
+
 			insertData_Builder->get_widget<Gtk::Box>("insertwindow-genres", insertData_Box_Genres);
 			insertData_Genres = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New genre");
 			for (const auto& genre : config_DefaultTags.genres)
@@ -271,6 +280,16 @@ namespace hn
 					std::string label = iterator->get_label();
 					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
 					imageProperties.setting.locationProperties.push_back(label);
+				}
+			}
+			const auto locationItemsWidgets = insertData_Setting_LocationItems->getWidgets();
+			for (const auto& iterator : locationItemsWidgets)
+			{
+				if (iterator->get_active())
+				{
+					std::string label = iterator->get_label();
+					std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+					imageProperties.setting.locationItems.push_back(label);
 				}
 			}
 			const auto genresWidgets = insertData_Genres->getWidgets();
