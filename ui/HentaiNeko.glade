@@ -2378,6 +2378,7 @@ Free today, free forever</property>
                         <child>
                           <object class="GtkButton" id="buttonPreviousImage">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can-focus">True</property>
                             <property name="receives-default">True</property>
                             <property name="tooltip-text" translatable="yes">Previous</property>
@@ -2400,6 +2401,7 @@ Free today, free forever</property>
                         <child>
                           <object class="GtkButton" id="buttonNextImage">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can-focus">True</property>
                             <property name="receives-default">True</property>
                             <property name="tooltip-text" translatable="yes">Next</property>

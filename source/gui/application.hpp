@@ -28,6 +28,7 @@ namespace hn
 			void insertDataWindow_updateImagePreviewerLabels();
 			void insertDataWindow_buttonPreviewNext();
 			void insertDataWindow_buttonPreviewPrevious();
+			void insertDataWindow_buttonPreviewLock();
 			void insertDataWindow_collectImageProperties();
 			// Preview Json Window
 			void initPreviewJsonWindow();

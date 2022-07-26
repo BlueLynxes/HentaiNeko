@@ -76,6 +76,7 @@ namespace hn
 			previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 			insertDataWindow_updateImagePreviewerLabels();
 			insertData_Button_OpenEntryPointPickerDialogue->set_sensitive(true);
+			insertDataWindow_buttonPreviewLock();
 		}
 
 		void Application::insertDataWindow_onScanError()
@@ -112,6 +113,7 @@ namespace hn
 				insertData_Box_previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 				insertDataWindow_updateImagePreviewerLabels();
 			}
+			insertDataWindow_buttonPreviewLock();
 		}
 
 		void Application::insertDataWindow_buttonPreviewPrevious()
@@ -125,6 +127,21 @@ namespace hn
 				insertData_imagePreviewer->show();
 				insertData_Box_previewBox->pack_start(*insertData_imagePreviewer, true, true, 0);
 				insertDataWindow_updateImagePreviewerLabels();
+			}
+			insertDataWindow_buttonPreviewLock();
+		}
+
+		void Application::insertDataWindow_buttonPreviewLock()
+		{
+			insertData_Button_previewNextPicture->set_sensitive(true);
+			insertData_Button_previewPreviousPicture->set_sensitive(true);
+			if (insertData_picturesIndex + 1 >= collectionScanner.imagesPaths.end())
+			{
+				insertData_Button_previewNextPicture->set_sensitive(false);
+			}
+			if (insertData_picturesIndex - collectionScanner.imagesPaths.begin() - 1 < 0)
+			{
+				insertData_Button_previewPreviousPicture->set_sensitive(false);
 			}
 		}
 
