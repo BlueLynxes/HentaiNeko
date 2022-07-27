@@ -14,7 +14,7 @@ namespace hn
 		class DynamicCheckbox
 		{
 		public:
-			DynamicCheckbox(std::function<Gtk::CheckButton* (const std::string&)> initWidgetLogic,
+			DynamicCheckbox(std::function<WidgetType* (const std::string&)> initWidgetLogic,
 							std::function<std::function<bool(Gtk::Box&)>(const std::string&)> comparisonLogic,
 							const std::string& placeholderText = std::string("Add a new tag :3")
 			) :
@@ -142,7 +142,7 @@ namespace hn
 				return mainContainer;
 			}
 		private:
-			std::function<Gtk::CheckButton* (const std::string&)> initWidgetLogic;
+			std::function<WidgetType* (const std::string&)> initWidgetLogic;
 			std::function<std::function<bool(Gtk::Box&)>(const std::string&)> comparisonLogic;
 			std::vector<Gtk::Box> listboxItems;
 			Gtk::Box mainContainer;
