@@ -160,7 +160,7 @@ Free today, free forever</property>
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="icon-name">back</property>
+                <property name="icon-name">go-previous</property>
               </object>
             </child>
           </object>
@@ -2848,7 +2848,7 @@ Free today, free forever</property>
                                                           <object class="GtkImage">
                                                             <property name="visible">True</property>
                                                             <property name="can-focus">False</property>
-                                                            <property name="icon-name">application-exit</property>
+                                                            <property name="icon-name">edit-delete</property>
                                                           </object>
                                                         </child>
                                                       </object>
@@ -3152,7 +3152,7 @@ Free today, free forever</property>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="icon-name">media-floppy</property>
+                    <property name="icon-name">document-save</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -3238,7 +3238,7 @@ Free today, free forever</property>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="icon-name">mail-mark-important</property>
+                    <property name="icon-name">help-about</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

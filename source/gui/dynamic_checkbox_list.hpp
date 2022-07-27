@@ -90,7 +90,7 @@ namespace hn
 				listboxItems.push_back(Gtk::Box());
 				listboxItems.back().pack_start(widget, true, true, 0);
 				Gtk::Button* button = new Gtk::Button();
-				Gtk::Image* deleteItemIcon = new Gtk::Image(Gtk::StockID("gtk-close"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
+				Gtk::Image* deleteItemIcon = new Gtk::Image(Gtk::StockID("gtk-delete"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
 				if (label.has_value())
 				{
 					button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &DynamicCheckbox::deleteWidgetCallback), label.value()));
