@@ -47,7 +47,7 @@ namespace hn
 				entryBox.set_spacing(5);
 				entryBox.add(entry);
 				entryBox.add(addEntryButton);
-				addEntryButtonIcon = Gtk::Image(Gtk::StockID("gtk-add"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
+				addEntryButtonIcon = Gtk::Image("list-add", Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
 				addEntryButton.add(addEntryButtonIcon);
 				entry.set_hexpand(true);
 				entry.set_placeholder_text(placeholderText);
@@ -90,7 +90,7 @@ namespace hn
 				listboxItems.push_back(Gtk::Box());
 				listboxItems.back().pack_start(widget, true, true, 0);
 				Gtk::Button* button = new Gtk::Button();
-				Gtk::Image* deleteItemIcon = new Gtk::Image(Gtk::StockID("gtk-delete"), Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
+				Gtk::Image* deleteItemIcon = new Gtk::Image("edit-delete", Gtk::IconSize(Gtk::BuiltinIconSize::ICON_SIZE_BUTTON));
 				if (label.has_value())
 				{
 					button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &DynamicCheckbox::deleteWidgetCallback), label.value()));
