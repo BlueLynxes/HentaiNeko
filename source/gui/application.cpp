@@ -256,6 +256,25 @@ namespace hn
 			insertData_Builder->get_widget<Gtk::ComboBoxText>("insertwindow-setting-timeofday", insertData_ComboBoxText_Setting_TimeOfDay);
 			insertData_Builder->get_widget<Gtk::ComboBoxText>("insertwindow-setting-season", insertData_ComboBoxText_Setting_Season);
 			insertData_Builder->get_widget<Gtk::Entry>("insertwindow-setting-light", insertData_ComboBoxText_Setting_Light);
+		
+			insertData_Builder->get_widget<Gtk::Box>("character-list-box", insertData_Box_Characters);
+			std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkCharacterEntryValue = [](const std::string& label)
+			{
+				return [&label](Gtk::Box& item) -> bool {
+					if (((Gtk::Label*)((Gtk::Box*)item.get_children().front())->get_children().front())->get_text() == label)
+					{
+						return true;
+					}
+					return false;
+				};
+			};
+			std::function<hn::gui::widget::CharacterEntryListItem* (const std::string&)> addCharacterEntry = [container = insertData_Box_Characters](const std::string& label) -> hn::gui::widget::CharacterEntryListItem*
+			{
+				return new hn::gui::widget::CharacterEntryListItem(label, container);
+			};
+			insertData_Characters = std::make_unique<hn::gui::widget::DynamicCheckbox<hn::gui::widget::CharacterEntryListItem>>(addCharacterEntry, checkCharacterEntryValue, "Add character");
+			(*insertData_Characters)().property_name().set_value("charactersList");
+			insertData_Box_Characters->add((*insertData_Characters)());
 		}
 
 		void Application::showInsertDataWindow()

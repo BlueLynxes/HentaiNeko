@@ -6,6 +6,7 @@
 #include "../backend/tags_config.hpp"
 #include "image_previewer.hpp"
 #include "dynamic_checkbox_list.hpp"
+#include "widgets/CharacterEntryListItem.hpp"
 
 namespace hn
 {
@@ -75,6 +76,8 @@ namespace hn
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Genres;
 			Gtk::Box* insertData_Box_Tags;
 			hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* insertData_Tags;
+			Gtk::Box* insertData_Box_Characters;
+			std::unique_ptr<hn::gui::widget::DynamicCheckbox<hn::gui::widget::CharacterEntryListItem>> insertData_Characters;
 
 			Glib::RefPtr<Gtk::Builder> about_Builder;
 			Gtk::Window* about_Window;
