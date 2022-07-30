@@ -54,6 +54,5 @@ namespace hn::gui::widget
 	{
 		characterEditor->set_visible(false);
 		containerWidget->get_children().front()->set_visible(true);
-		std::cout << "CLOSE DA WINDOW AND LOOK AT WAIFUS" << std::endl;
 	}
 }
