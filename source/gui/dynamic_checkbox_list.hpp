@@ -116,6 +116,10 @@ namespace hn
 				if (itemToDelete != listboxItems.end())
 				{
 					itemToDelete->get_parent()->get_parent()->remove(*itemToDelete->get_parent());
+					delete itemToDelete->get_children().front(); // Delete user defined widget
+					// TODO: Check how to delete icons and if allocating the icon once and deleting it on DynamicCheckbox destructor makes sense
+					delete itemToDelete->get_children().back(); // Delete button
+					delete &(* itemToDelete->get_parent());
 					listboxItems.erase(itemToDelete);
 				}
 			}
