@@ -38,7 +38,7 @@ namespace hn
 					std::string brand;
 					std::string characterName;
 					std::string gender;
-					std::string type;
+					std::vector<std::string> types;
 				};
 				struct BodyDescription
 				{

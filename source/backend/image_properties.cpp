@@ -108,9 +108,16 @@ namespace hn
 							{
 								generalInfo.gender = charactersArray[index]["generalInfo"]["gender"].asString();
 							}
-							if (charactersArray[index]["generalInfo"]["type"].isString())
+							if (charactersArray[index]["generalInfo"]["type"].isArray())
 							{
-								generalInfo.type = charactersArray[index]["generalInfo"]["type"].asString();
+								Json::Value typesArray = charactersArray[index]["clothingDescription"]["clothingItems"];
+								for (Json::Value::ArrayIndex index = 0; index != typesArray.size(); index++)
+								{
+									if (typesArray[index].isString())
+									{
+										generalInfo.types.push_back(typesArray[index].asString());
+									}
+								}
 							}
 							character.generalInfo = generalInfo;
 						}
@@ -313,7 +320,12 @@ namespace hn
 				characterGeneralInfo["brand"] = character.generalInfo.brand;
 				characterGeneralInfo["characterName"] = character.generalInfo.characterName;
 				characterGeneralInfo["gender"] = character.generalInfo.gender;
-				characterGeneralInfo["type"] = character.generalInfo.type;
+				Json::Value types = Json::Value(Json::arrayValue);
+				for (auto type : character.generalInfo.types)
+				{
+					types.append(Json::Value(type));
+				}
+				characterGeneralInfo["type"] = types;
 				characterValue["generalInfo"] = characterGeneralInfo;
 
 				Json::Value characterBodyDescription = Json::Value(Json::objectValue);
