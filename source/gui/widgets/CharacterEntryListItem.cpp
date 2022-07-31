@@ -37,10 +37,30 @@ namespace hn::gui::widget
 			throw std::runtime_error("Character editor title label not found");
 		}
 		characterNameLabel->set_text(characterLabel);
+
+		std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkValue = [](const std::string& label)
+		{
+			return [&label](Gtk::Box& item) -> bool {
+				if (((Gtk::CheckButton*)item.get_children().front())->get_label() == label)
+				{
+					return true;
+				}
+				return false;
+			};
+		};
+		std::function<Gtk::CheckButton* (const std::string&)> addWidget = [](const std::string& label) -> Gtk::CheckButton*
+		{
+			return new Gtk::CheckButton(label);
+		};
+		characterInfo_CharacterTypeBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-character-type-box");
+		characterTypeList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New character type");
+		characterInfo_CharacterTypeBox->add((*characterTypeList)());
+		characterInfo_CharacterTypeBox->show_all();
 	}
 
 	CharacterEntryListItem::~CharacterEntryListItem()
 	{
+		delete characterTypeList;
 		delete characterEditor;
 	}
 
@@ -54,5 +74,24 @@ namespace hn::gui::widget
 	{
 		characterEditor->set_visible(false);
 		containerWidget->get_children().front()->set_visible(true);
+	}
+
+	std::map<std::string, std::vector<std::string>> CharacterEntryListItem::returnSelectedValues()
+	{
+		std::map<std::string, std::vector<std::string>> selectedValues;
+		const auto characterTypeWidgets = characterTypeList->getWidgets();
+		std::vector<std::string> characterTypes;
+		for (const auto& iterator : characterTypeWidgets)
+		{
+			if (iterator->get_active())
+			{
+				std::string label = iterator->get_label();
+				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+				characterTypes.push_back(label);
+			}
+		}
+		selectedValues["general-info/type"] = characterTypes;
+		// TODO: Add vector to map!
+		return selectedValues;
 	}
 }

@@ -351,6 +351,20 @@ namespace hn
 			imageProperties.setting.time = insertData_ComboBoxText_Setting_TimeOfDay->get_active_text();
 			imageProperties.setting.season = insertData_ComboBoxText_Setting_Season->get_active_text();
 			imageProperties.setting.light = insertData_ComboBoxText_Setting_Light->get_text();
+			const auto& characters = insertData_Characters->getWidgets();
+			for (const auto& character : characters)
+			{
+				hn::backend::ImageProperties::Character::GeneralInfo generalInfo;
+				auto selectedValues = character->returnSelectedValues();
+				const auto types = selectedValues["general-info/type"];
+				for (const auto& type : types)
+				{
+					generalInfo.types.push_back(type);
+				}
+				hn::backend::ImageProperties::Character currentCharacter;
+				currentCharacter.generalInfo = generalInfo;
+				imageProperties.characters.push_back(currentCharacter);
+			}
 		}
 
 		void Application::showPreviewJsonWindow()
