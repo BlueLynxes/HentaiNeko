@@ -104,17 +104,15 @@ namespace hn::gui::widget
 		Gtk::ComboBoxText* characterGender = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-gender");
 		character.generalInfo.gender = characterGender->get_active_text();
 		const auto characterTypeWidgets = characterTypeList->getWidgets();
-		std::vector<std::string> characterTypes;
 		for (const auto& iterator : characterTypeWidgets)
 		{
 			if (iterator->get_active())
 			{
 				std::string label = iterator->get_label();
 				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
-				characterTypes.push_back(label);
+				character.generalInfo.types.push_back(label);
 			}
 		}
-		character.generalInfo.types = characterTypes; // UNNECESSARY COPY
 		// Body
 		// Clothing
 		Gtk::Entry* clothingOutfitType = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-outfit-type");
@@ -124,30 +122,26 @@ namespace hn::gui::widget
 		character.clothingDescription.bodyExposureRate = std::stoi(clothingBodyExposureRate->get_text());
 		
 		const auto clothingAccessories = clothingAccessoriesList->getWidgets();
-		std::vector<std::string> characterClothingAccessories;
 		for (const auto& iterator : clothingAccessories)
 		{
 			if (iterator->get_active())
 			{
 				std::string label = iterator->get_label();
 				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
-				characterClothingAccessories.push_back(label);
+				character.clothingDescription.accessories.push_back(label);
 			}
 		}
-		character.clothingDescription.accessories = characterClothingAccessories; // UNNECESSARY COPY
 
 		const auto clothingItems = clothingItemsList->getWidgets();
-		std::vector<std::string> characterClothingItems;
 		for (const auto& iterator : clothingItems)
 		{
 			if (iterator->get_active())
 			{
 				std::string label = iterator->get_label();
 				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
-				characterClothingItems.push_back(label);
+				character.clothingDescription.clothingItems.push_back(label);
 			}
 		}
-		character.clothingDescription.clothingItems = characterClothingItems; // UNNECESSARY COPY
 		// Accessories
 		// Positions
 		// Expressions
