@@ -354,19 +354,7 @@ namespace hn
 			const auto& characters = insertData_Characters->getWidgets();
 			for (const auto& character : characters)
 			{
-				hn::backend::ImageProperties::Character::GeneralInfo generalInfo;
-				auto selectedValues = character->returnSelectedValues();
-				generalInfo.brand = selectedValues["general-info/brand"].front();
-				generalInfo.characterName = selectedValues["general-info/name"].front();
-				generalInfo.gender = selectedValues["general-info/gender"].front();
-				const auto types = selectedValues["general-info/type"];
-				for (const auto& type : types)
-				{
-					generalInfo.types.push_back(type);
-				}
-				hn::backend::ImageProperties::Character currentCharacter;
-				currentCharacter.generalInfo = generalInfo;
-				imageProperties.characters.push_back(currentCharacter);
+				imageProperties.characters.push_back(character->returnSelectedValues());
 			}
 		}
 
