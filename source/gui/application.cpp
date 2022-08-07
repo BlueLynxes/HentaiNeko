@@ -356,6 +356,9 @@ namespace hn
 			{
 				hn::backend::ImageProperties::Character::GeneralInfo generalInfo;
 				auto selectedValues = character->returnSelectedValues();
+				generalInfo.brand = selectedValues["general-info/brand"].front();
+				generalInfo.characterName = selectedValues["general-info/name"].front();
+				generalInfo.gender = selectedValues["general-info/gender"].front();
 				const auto types = selectedValues["general-info/type"];
 				for (const auto& type : types)
 				{

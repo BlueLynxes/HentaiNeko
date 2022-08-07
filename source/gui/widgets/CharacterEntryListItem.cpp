@@ -76,9 +76,19 @@ namespace hn::gui::widget
 		containerWidget->get_children().front()->set_visible(true);
 	}
 
-	std::map<std::string, std::vector<std::string>> CharacterEntryListItem::returnSelectedValues()
+	std::unordered_map<std::string, std::vector<std::string>> CharacterEntryListItem::returnSelectedValues()
 	{
-		std::map<std::string, std::vector<std::string>> selectedValues;
+		std::unordered_map<std::string, std::vector<std::string>> selectedValues;
+		Gtk::ComboBoxText* characterBrand = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-brand");
+		selectedValues["general-info/brand"] = std::vector<std::string>(1, std::string(characterBrand->get_active_text()));
+		Gtk::ComboBoxText* characterName = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
+		selectedValues["general-info/name"] = std::vector<std::string>(1, std::string(characterName->get_active_text()));
+		Gtk::ComboBoxText* characterGender = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-gender");
+		selectedValues["general-info/gender"] = std::vector<std::string>(1, std::string(characterGender->get_active_text()));
+		if (characterBrand == nullptr || characterName == nullptr || characterGender == nullptr)
+		{
+			throw std::runtime_error("MUDAFFAKKA DID NOT FIND SHIT");
+		}
 		const auto characterTypeWidgets = characterTypeList->getWidgets();
 		std::vector<std::string> characterTypes;
 		for (const auto& iterator : characterTypeWidgets)
@@ -91,7 +101,6 @@ namespace hn::gui::widget
 			}
 		}
 		selectedValues["general-info/type"] = characterTypes;
-		// TODO: Add vector to map!
 		return selectedValues;
 	}
 }

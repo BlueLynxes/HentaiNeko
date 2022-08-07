@@ -247,7 +247,7 @@ Free today, free forever</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Light</property>
+                    <property name="label" translatable="yes">Gender</property>
                   </object>
                   <packing>
                     <property name="left-attach">0</property>
@@ -255,7 +255,8 @@ Free today, free forever</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBoxText">
+                  <object class="GtkComboBoxText" id="general-info-brand">
+                    <property name="name">general-info-brand</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
@@ -277,7 +278,8 @@ Free today, free forever</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBoxText">
+                  <object class="GtkComboBoxText" id="general-info-name">
+                    <property name="name">general-info-name</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
@@ -294,11 +296,17 @@ Free today, free forever</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBoxText">
+                  <object class="GtkComboBoxText" id="general-info-light">
+                    <property name="name">general-info-gender</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="has-entry">True</property>
+                    <items>
+                      <item translatable="yes">Female</item>
+                      <item translatable="yes">Male</item>
+                      <item translatable="yes">Unspecified</item>
+                    </items>
                     <child internal-child="entry">
                       <object class="GtkEntry">
                         <property name="can-focus">False</property>
