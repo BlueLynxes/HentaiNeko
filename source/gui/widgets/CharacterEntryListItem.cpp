@@ -55,15 +55,27 @@ namespace hn::gui::widget
 		characterInfo_CharacterTypeBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-character-type-box");
 		characterTypeList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New character type");
 		characterInfo_CharacterTypeBox->add((*characterTypeList)());
+		characterInfo_CharacterTypeBox->show_all();
+		
+		clothing_AccessoriesBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-accessories-box");
+		clothingAccessoriesList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New accessory");
+		clothing_AccessoriesBox->add((*clothingAccessoriesList)());
+		clothing_AccessoriesBox->show_all();
+		
+		clothing_ItemsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-clothing-items-box");
+		clothingItemsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New item");
+		clothing_ItemsBox->add((*clothingItemsList)());
+		clothing_ItemsBox->show_all();
 
 		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
 		characterName->set_text(characterLabel);
-		characterInfo_CharacterTypeBox->show_all();
 	}
 
 	CharacterEntryListItem::~CharacterEntryListItem()
 	{
 		delete characterTypeList;
+		delete clothingAccessoriesList;
+		delete clothingItemsList;
 		delete characterEditor;
 	}
 
@@ -81,7 +93,10 @@ namespace hn::gui::widget
 
 	hn::backend::ImageProperties::Character CharacterEntryListItem::returnSelectedValues()
 	{
+		// TODO: Optimize data collection
+		// Instead of making a vector to then copy onto the character object, use the character object directly
 		hn::backend::ImageProperties::Character character;
+		// General Info
 		Gtk::ComboBoxText* characterBrand = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-brand");
 		character.generalInfo.brand = characterBrand->get_active_text();
 		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
@@ -99,7 +114,44 @@ namespace hn::gui::widget
 				characterTypes.push_back(label);
 			}
 		}
-		character.generalInfo.types = characterTypes;
+		character.generalInfo.types = characterTypes; // UNNECESSARY COPY
+		// Body
+		// Clothing
+		Gtk::Entry* clothingOutfitType = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-outfit-type");
+		character.clothingDescription.outfitType = clothingOutfitType->get_text();
+		
+		Gtk::SpinButton* clothingBodyExposureRate = (Gtk::SpinButton*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-body-exposure-rate");
+		character.clothingDescription.bodyExposureRate = std::stoi(clothingBodyExposureRate->get_text());
+		
+		const auto clothingAccessories = clothingAccessoriesList->getWidgets();
+		std::vector<std::string> characterClothingAccessories;
+		for (const auto& iterator : clothingAccessories)
+		{
+			if (iterator->get_active())
+			{
+				std::string label = iterator->get_label();
+				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+				characterClothingAccessories.push_back(label);
+			}
+		}
+		character.clothingDescription.accessories = characterClothingAccessories; // UNNECESSARY COPY
+
+		const auto clothingItems = clothingItemsList->getWidgets();
+		std::vector<std::string> characterClothingItems;
+		for (const auto& iterator : clothingItems)
+		{
+			if (iterator->get_active())
+			{
+				std::string label = iterator->get_label();
+				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+				characterClothingItems.push_back(label);
+			}
+		}
+		character.clothingDescription.clothingItems = characterClothingItems; // UNNECESSARY COPY
+		// Accessories
+		// Positions
+		// Expressions
+		// Actions
 		return character;
 	}
 }

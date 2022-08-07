@@ -26,5 +26,9 @@ namespace hn::gui::widget
 
 		Gtk::Box* characterInfo_CharacterTypeBox;
 		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* characterTypeList;
+		Gtk::Box* clothing_AccessoriesBox;
+		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* clothingAccessoriesList;
+		Gtk::Box* clothing_ItemsBox;
+		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* clothingItemsList;
 	};
 }
