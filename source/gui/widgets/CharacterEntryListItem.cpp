@@ -55,6 +55,9 @@ namespace hn::gui::widget
 		characterInfo_CharacterTypeBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-character-type-box");
 		characterTypeList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New character type");
 		characterInfo_CharacterTypeBox->add((*characterTypeList)());
+
+		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
+		characterName->set_text(characterLabel);
 		characterInfo_CharacterTypeBox->show_all();
 	}
 
@@ -81,8 +84,8 @@ namespace hn::gui::widget
 		hn::backend::ImageProperties::Character character;
 		Gtk::ComboBoxText* characterBrand = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-brand");
 		character.generalInfo.brand = characterBrand->get_active_text();
-		Gtk::ComboBoxText* characterName = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
-		character.generalInfo.characterName = characterName->get_active_text();
+		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
+		character.generalInfo.characterName = characterName->get_text();
 		Gtk::ComboBoxText* characterGender = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-gender");
 		character.generalInfo.gender = characterGender->get_active_text();
 		const auto characterTypeWidgets = characterTypeList->getWidgets();

@@ -278,24 +278,6 @@ Free today, free forever</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBoxText" id="general-info-name">
-                    <property name="name">general-info-name</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="has-entry">True</property>
-                    <child internal-child="entry">
-                      <object class="GtkEntry">
-                        <property name="can-focus">False</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left-attach">1</property>
-                    <property name="top-attach">1</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkComboBoxText" id="general-info-light">
                     <property name="name">general-info-gender</property>
                     <property name="visible">True</property>
@@ -316,6 +298,17 @@ Free today, free forever</property>
                   <packing>
                     <property name="left-attach">1</property>
                     <property name="top-attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="general-info-name">
+                    <property name="name">general-info-name</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="left-attach">1</property>
+                    <property name="top-attach">1</property>
                   </packing>
                 </child>
               </object>
