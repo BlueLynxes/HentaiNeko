@@ -98,11 +98,11 @@ namespace hn::gui::widget
 		hn::backend::ImageProperties::Character character;
 		// General Info
 		Gtk::ComboBoxText* characterBrand = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-brand");
-		character.generalInfo.brand = characterBrand->get_active_text();
+		character.generalInfo.brand = characterBrand->get_active_text().lowercase();
 		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
-		character.generalInfo.characterName = characterName->get_text();
+		character.generalInfo.characterName = characterName->get_text().lowercase();
 		Gtk::ComboBoxText* characterGender = (Gtk::ComboBoxText*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-gender");
-		character.generalInfo.gender = characterGender->get_active_text();
+		character.generalInfo.gender = characterGender->get_active_text().lowercase();
 		const auto characterTypeWidgets = characterTypeList->getWidgets();
 		for (const auto& iterator : characterTypeWidgets)
 		{
@@ -116,7 +116,7 @@ namespace hn::gui::widget
 		// Body
 		// Clothing
 		Gtk::Entry* clothingOutfitType = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-outfit-type");
-		character.clothingDescription.outfitType = clothingOutfitType->get_text();
+		character.clothingDescription.outfitType = clothingOutfitType->get_text().lowercase();
 		
 		Gtk::SpinButton* clothingBodyExposureRate = (Gtk::SpinButton*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-body-exposure-rate");
 		character.clothingDescription.bodyExposureRate = std::stoi(clothingBodyExposureRate->get_text());
