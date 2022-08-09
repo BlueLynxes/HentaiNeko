@@ -67,10 +67,31 @@ namespace hn::gui::widget
 		clothing_ItemsBox->add((*clothingItemsList)());
 		clothing_ItemsBox->show_all();
 
+		// Body Section
 		body_ModificationsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "body-modifications-box");
 		bodyModificationsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New modification");
 		body_ModificationsBox->add((*bodyModificationsList)());
 		body_ModificationsBox->show_all();
+
+		std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkDoubleFieldEntryValue = [](const std::string& label)
+		{
+			return [&label](Gtk::Box& item) -> bool {
+				Gtk::Label* leftEntry = (Gtk::Label*)hn::utils::gtk::find_children_by_name(&item, "left-entry");
+				if (leftEntry->get_text() == label)
+				{
+					return true;
+				}
+				return false;
+			};
+		};
+		std::function<hn::gui::widget::DoubleFieldEntry* (const std::string&)> addBodyPartProportionWidget = [](const std::string& label) -> hn::gui::widget::DoubleFieldEntry*
+		{
+			return new hn::gui::widget::DoubleFieldEntry("Proportion value", label, "");
+		};
+		body_ProportionsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "body-proportions-box");
+		bodyProportionList = new hn::gui::widget::DynamicCheckbox<hn::gui::widget::DoubleFieldEntry>(addBodyPartProportionWidget, checkDoubleFieldEntryValue, "");
+		body_ProportionsBox->add((*bodyProportionList)());
+		body_ProportionsBox->show_all();
 
 		// Accessories Section
 		accessories_Box = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "section-accessories");
@@ -160,6 +181,18 @@ namespace hn::gui::widget
 
 		Gtk::Entry* bodyEyeColorEntry  = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-eye-color");
 		character.bodyDescription.eyeColor = bodyEyeColorEntry->get_text().lowercase();
+
+		const auto bodyProportions = bodyProportionList->getWidgets();
+		for (const auto& iterator : bodyProportions)
+		{
+			if (iterator->checkButton->get_active())
+			{
+				character.bodyDescription.bodyProportions.insert({
+					iterator->leftEntry->get_text().lowercase(),
+					iterator->rightEntry->get_text().lowercase()
+					});
+			}
+		}
 
 		const auto bodyModifications = bodyModificationsList->getWidgets();
 		for (const auto& iterator : bodyModifications)

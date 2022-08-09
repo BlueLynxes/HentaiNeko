@@ -3,6 +3,7 @@
 #include <gtkmm.h>
 #include "../dynamic_checkbox_list.hpp"
 #include "../../backend/image_properties.hpp"
+#include "DoubleFieldEntry.hpp"
 #include <memory>
 
 namespace hn::gui::widget
@@ -26,6 +27,8 @@ namespace hn::gui::widget
 
 		Gtk::Box* characterInfo_CharacterTypeBox;
 		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* characterTypeList;
+		Gtk::Box* body_ProportionsBox;
+		hn::gui::widget::DynamicCheckbox<hn::gui::widget::DoubleFieldEntry>* bodyProportionList;
 		Gtk::Box* body_ModificationsBox;
 		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* bodyModificationsList;
 		Gtk::Box* clothing_AccessoriesBox;
