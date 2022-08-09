@@ -99,7 +99,7 @@ namespace hn::gui::widget
 			return new hn::gui::widget::DoubleFieldEntry("Proportion value", label, "");
 		};
 		body_ProportionsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "body-proportions-box");
-		bodyProportionList = new hn::gui::widget::DynamicCheckbox<hn::gui::widget::DoubleFieldEntry>(addBodyPartProportionWidget, checkDoubleFieldEntryValue, "");
+		bodyProportionList = new hn::gui::widget::DynamicCheckbox<hn::gui::widget::DoubleFieldEntry>(addBodyPartProportionWidget, checkDoubleFieldEntryValue, "Add body part");
 		body_ProportionsBox->add((*bodyProportionList)());
 		body_ProportionsBox->show_all();
 
