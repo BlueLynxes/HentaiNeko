@@ -124,6 +124,7 @@ namespace hn::gui::widget
 		delete characterTypeList;
 		delete clothingAccessoriesList;
 		delete clothingItemsList;
+		delete bodyProportionList;
 		delete bodyModificationsList;
 		delete accessoriesList;
 		delete positionsList;
