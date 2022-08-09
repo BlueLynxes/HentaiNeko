@@ -43,9 +43,10 @@ namespace hn
 			Gtk::FileChooserDialog dialog = Gtk::FileChooserDialog(
 				"Select Entry point",
 				Gtk::FileChooserAction::FILE_CHOOSER_ACTION_SELECT_FOLDER,
-				Gtk::DialogFlags::DIALOG_MODAL
+				Gtk::DialogFlags::DIALOG_MODAL | Gtk::DialogFlags::DIALOG_USE_HEADER_BAR
 				);
 			dialog.add_button("Select", Gtk::ResponseType::RESPONSE_OK);
+			dialog.add_button(Gtk::Stock::CANCEL, Gtk::ResponseType::RESPONSE_CANCEL);
 			int response = dialog.run();
 			if (response == Gtk::ResponseType::RESPONSE_OK)
 			{
