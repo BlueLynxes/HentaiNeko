@@ -72,6 +72,28 @@ namespace hn::gui::widget
 		body_ModificationsBox->add((*bodyModificationsList)());
 		body_ModificationsBox->show_all();
 
+		// Accessories Section
+		accessories_Box = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "section-accessories");
+		accessoriesList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New accessory");
+		accessories_Box->add((*accessoriesList)());
+		accessories_Box->show_all();
+		// Positions Section
+		positions_Box = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "section-positions");
+		positionsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "Define position");
+		positions_Box->add((*positionsList)());
+		positions_Box->show_all();
+		// Expressions Section
+		expressions_Box = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "section-expressions");
+		expressionsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "Define expressions");
+		expressions_Box->add((*expressionsList)());
+		expressions_Box->show_all();
+		// Actions Section
+		actions_Box = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "section-actions");
+		actionsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "Define action");
+		actions_Box->add((*actionsList)());
+		actions_Box->show_all();
+
+		// Setting default name
 		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
 		characterName->set_text(characterLabel);
 	}
@@ -82,6 +104,10 @@ namespace hn::gui::widget
 		delete clothingAccessoriesList;
 		delete clothingItemsList;
 		delete bodyModificationsList;
+		delete accessoriesList;
+		delete positionsList;
+		delete expressionsList;
+		delete actionsList;
 		delete characterEditor;
 	}
 
@@ -174,9 +200,38 @@ namespace hn::gui::widget
 			}
 		}
 		// Accessories
+		const auto accessories = accessoriesList->getWidgets();
+		for (const auto& iterator : accessories)
+		{
+			std::string label = iterator->get_label();
+			std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+			character.accesories.push_back(label);
+		}
 		// Positions
+		const auto positions = positionsList->getWidgets();
+		for (const auto& iterator : positions)
+		{
+			std::string label = iterator->get_label();
+			std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+			character.bodyPosition.push_back(label);
+		}
 		// Expressions
+		const auto expressions = expressionsList->getWidgets();
+		for (const auto& iterator : expressions)
+		{
+			std::string label = iterator->get_label();
+			std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+			character.facialExpressions.push_back(label);
+		}
 		// Actions
+		const auto actions = actionsList->getWidgets();
+		for (const auto& iterator : actions)
+		{
+			std::string label = iterator->get_label();
+			std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+			character.actions.push_back(label);
+		}
+
 		return character;
 	}
 }

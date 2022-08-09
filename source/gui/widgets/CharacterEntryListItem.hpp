@@ -32,5 +32,13 @@ namespace hn::gui::widget
 		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* clothingAccessoriesList;
 		Gtk::Box* clothing_ItemsBox;
 		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* clothingItemsList;
+		Gtk::Box* accessories_Box;
+		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* accessoriesList;
+		Gtk::Box* positions_Box;
+		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* positionsList;
+		Gtk::Box* expressions_Box;
+		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* expressionsList;
+		Gtk::Box* actions_Box;
+		hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>* actionsList;
 	};
 }

@@ -1505,15 +1505,10 @@ Free today, free forever</property>
         </child>
         <child>
           <object class="GtkBox">
+            <property name="name">section-accessories</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
             <child>
               <placeholder/>
             </child>
@@ -1526,15 +1521,10 @@ Free today, free forever</property>
         </child>
         <child>
           <object class="GtkBox">
+            <property name="name">section-positions</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
             <child>
               <placeholder/>
             </child>
@@ -1547,15 +1537,10 @@ Free today, free forever</property>
         </child>
         <child>
           <object class="GtkBox">
+            <property name="name">section-expressions</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
             <child>
               <placeholder/>
             </child>
@@ -1568,15 +1553,10 @@ Free today, free forever</property>
         </child>
         <child>
           <object class="GtkBox">
+            <property name="name">section-actions</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
             <child>
               <placeholder/>
             </child>
