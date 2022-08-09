@@ -435,6 +435,7 @@ Free today, free forever</property>
                         </child>
                         <child>
                           <object class="GtkEntry">
+                            <property name="name">body-weight</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="hexpand">True</property>
@@ -446,6 +447,7 @@ Free today, free forever</property>
                         </child>
                         <child>
                           <object class="GtkEntry">
+                            <property name="name">body-skin-tone</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="hexpand">True</property>
@@ -508,6 +510,7 @@ Free today, free forever</property>
                         </child>
                         <child>
                           <object class="GtkEntry">
+                            <property name="name">body-hair-color</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="hexpand">True</property>
@@ -519,6 +522,7 @@ Free today, free forever</property>
                         </child>
                         <child>
                           <object class="GtkEntry">
+                            <property name="name">body-hair-style</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="hexpand">True</property>
@@ -573,6 +577,7 @@ Free today, free forever</property>
                 </child>
                 <child>
                   <object class="GtkEntry">
+                    <property name="name">body-eye-color</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="hexpand">True</property>

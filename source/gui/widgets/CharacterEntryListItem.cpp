@@ -114,6 +114,20 @@ namespace hn::gui::widget
 			}
 		}
 		// Body
+		Gtk::Entry* bodyWeightEntry    = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-weight");
+		character.bodyDescription.weight = bodyWeightEntry->get_text().lowercase();
+
+		Gtk::Entry* bodySkinToneEntry  = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-skin-tone");
+		character.bodyDescription.skinTone = bodySkinToneEntry->get_text().lowercase();
+
+		Gtk::Entry* bodyHairColorEntry = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-hair-color");
+		character.bodyDescription.hairColor = bodyHairColorEntry->get_text().lowercase();
+
+		Gtk::Entry* bodyHairStyleEntry = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-hair-style");
+		character.bodyDescription.hairStyle = bodyHairStyleEntry->get_text().lowercase();
+
+		Gtk::Entry* bodyEyeColorEntry  = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-eye-color");
+		character.bodyDescription.eyeColor = bodyEyeColorEntry->get_text().lowercase();
 		// Clothing
 		Gtk::Entry* clothingOutfitType = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-outfit-type");
 		character.clothingDescription.outfitType = clothingOutfitType->get_text().lowercase();
