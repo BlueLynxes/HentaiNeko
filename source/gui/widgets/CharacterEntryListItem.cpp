@@ -67,6 +67,11 @@ namespace hn::gui::widget
 		clothing_ItemsBox->add((*clothingItemsList)());
 		clothing_ItemsBox->show_all();
 
+		body_ModificationsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "body-modifications-box");
+		bodyModificationsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New modification");
+		body_ModificationsBox->add((*bodyModificationsList)());
+		body_ModificationsBox->show_all();
+
 		Gtk::Entry* characterName = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "general-info-name");
 		characterName->set_text(characterLabel);
 	}
@@ -76,6 +81,7 @@ namespace hn::gui::widget
 		delete characterTypeList;
 		delete clothingAccessoriesList;
 		delete clothingItemsList;
+		delete bodyModificationsList;
 		delete characterEditor;
 	}
 
@@ -128,6 +134,17 @@ namespace hn::gui::widget
 
 		Gtk::Entry* bodyEyeColorEntry  = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "body-eye-color");
 		character.bodyDescription.eyeColor = bodyEyeColorEntry->get_text().lowercase();
+
+		const auto bodyModifications = bodyModificationsList->getWidgets();
+		for (const auto& iterator : bodyModifications)
+		{
+			if (iterator->get_active())
+			{
+				std::string label = iterator->get_label();
+				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
+				character.bodyDescription.bodyModifications.push_back(label);
+			}
+		}
 		// Clothing
 		Gtk::Entry* clothingOutfitType = (Gtk::Entry*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-outfit-type");
 		character.clothingDescription.outfitType = clothingOutfitType->get_text().lowercase();
