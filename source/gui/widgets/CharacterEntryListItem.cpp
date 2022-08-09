@@ -57,6 +57,7 @@ namespace hn::gui::widget
 		characterInfo_CharacterTypeBox->add((*characterTypeList)());
 		characterInfo_CharacterTypeBox->show_all();
 		
+		// Clothing Section
 		clothing_AccessoriesBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-accessories-box");
 		clothingAccessoriesList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New accessory");
 		clothing_AccessoriesBox->add((*clothingAccessoriesList)());
@@ -66,12 +67,6 @@ namespace hn::gui::widget
 		clothingItemsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New item");
 		clothing_ItemsBox->add((*clothingItemsList)());
 		clothing_ItemsBox->show_all();
-
-		// Body Section
-		body_ModificationsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "body-modifications-box");
-		bodyModificationsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New modification");
-		body_ModificationsBox->add((*bodyModificationsList)());
-		body_ModificationsBox->show_all();
 
 		std::function<std::function<bool(Gtk::Box&)>(const std::string&)> checkDoubleFieldEntryValue = [](const std::string& label)
 		{
@@ -84,6 +79,21 @@ namespace hn::gui::widget
 				return false;
 			};
 		};
+		std::function<hn::gui::widget::DoubleFieldEntry* (const std::string&)> addBodyPartExposureWidget = [](const std::string& label) -> hn::gui::widget::DoubleFieldEntry*
+		{
+			return new hn::gui::widget::DoubleFieldEntry("Exposure", label, "");
+		};
+		clothing_BodyPartsExposureBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "clothing-body-parts-exposure-box");
+		clothingBodyPartsExposureList = new hn::gui::widget::DynamicCheckbox<hn::gui::widget::DoubleFieldEntry>(addBodyPartExposureWidget, checkDoubleFieldEntryValue, "Add body part");
+		clothing_BodyPartsExposureBox->add((*clothingBodyPartsExposureList)());
+		clothing_BodyPartsExposureBox->show_all();
+
+		// Body Section
+		body_ModificationsBox = (Gtk::Box*)hn::utils::gtk::find_children_by_name(characterEditor, "body-modifications-box");
+		bodyModificationsList = new hn::gui::widget::DynamicCheckbox<Gtk::CheckButton>(addWidget, checkValue, "New modification");
+		body_ModificationsBox->add((*bodyModificationsList)());
+		body_ModificationsBox->show_all();
+
 		std::function<hn::gui::widget::DoubleFieldEntry* (const std::string&)> addBodyPartProportionWidget = [](const std::string& label) -> hn::gui::widget::DoubleFieldEntry*
 		{
 			return new hn::gui::widget::DoubleFieldEntry("Proportion value", label, "");
@@ -124,6 +134,7 @@ namespace hn::gui::widget
 		delete characterTypeList;
 		delete clothingAccessoriesList;
 		delete clothingItemsList;
+		delete clothingBodyPartsExposureList;
 		delete bodyProportionList;
 		delete bodyModificationsList;
 		delete accessoriesList;
@@ -231,6 +242,18 @@ namespace hn::gui::widget
 				std::string label = iterator->get_label();
 				std::transform(label.begin(), label.end(), label.begin(), ::tolower);
 				character.clothingDescription.clothingItems.push_back(label);
+			}
+		}
+
+		const auto bodyPartExposure = clothingBodyPartsExposureList->getWidgets();
+		for (const auto& iterator : bodyPartExposure)
+		{
+			if (iterator->checkButton->get_active())
+			{
+				character.clothingDescription.bodyPartsExposure.insert({
+					iterator->leftEntry->get_text().lowercase(),
+					iterator->rightEntry->get_text().lowercase()
+					});
 			}
 		}
 		// Accessories
