@@ -404,3 +404,15 @@
   - Implementing defaults inits
   - Implementing the *"Characters"* section
   - ***Sleep*** *hey, it's 3:25 AM, I think I deserve a bit of rest! Good Night :3*
+
+  **Update 9**
+  First of all, the versioning has been changed, for now this is fine since nobody uses this thing.
+  
+  - Added every filed of the data input window (*yay*).
+    Mind you, the default file is still to be implemented for most of those, and adding and removing fields still
+    doesn't update the defaults file.
+  
+  Next Steps:
+  - Minimize the Json file and save onto the current picture metadata
+  - Pre compile fields basing off the Json loaded from the picture
+  - Empty out fields when going on a new picture that doesn't have a Json file
